@@ -1,6 +1,10 @@
 <img height="50px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
 
-Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy. For example:
+General-purpose time library for Javascript/Typescript.
+
+Supports dates, times, durations and time zones, in immutable, non-ambiguous representations, inspired by the masterful java.time library which suddenly made dates understandable by anyone.
+
+Example:
 
 ```javascript
 const currentTimeInNewYork = Instant
@@ -9,17 +13,17 @@ const currentTimeInNewYork = Instant
     .toLocalTime(); // returns a LocalTime
 ```
 
-The fluent syntax will help you solve any problem you have with dates.
-
 [![npm version](https://badge.fury.io/js/globol.svg)](https://badge.fury.io/js/globol)
 [![Build Status](https://travis-ci.org/Artiry/globol.svg?branch=master)](https://travis-ci.org/github/Artiry/globol)
 
 # Install
 
-
 ```shell
 npm install globol
 ```
+
+# Specifications/requirements
+- 
 
 # Feedback
 
