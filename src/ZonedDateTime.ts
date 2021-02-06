@@ -34,7 +34,7 @@ export class ZonedDateTime
 
 	public toInstant()
 	{
-		return new Instant(this.zonedMoment.toDate());
+		return Instant.from(this.zonedMoment.toDate());
 	}
 
 	public toLocalDate()

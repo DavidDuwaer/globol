@@ -6,7 +6,7 @@ export class Instant
 {
 	private readonly jsDate: Date;
 
-	constructor(jsDate: Date)
+	private constructor(jsDate: Date)
 	{
 		this.jsDate = jsDate;
 	}
@@ -14,6 +14,16 @@ export class Instant
 	public static now()
 	{
 		return new Instant(new Date());
+	}
+
+	public static parse(stringValue: string)
+	{
+		return new Instant(new Date(stringValue));
+	}
+
+	public static from(date: Date)
+	{
+		return new Instant(date);
 	}
 
 	public add(duration: Duration): Instant
