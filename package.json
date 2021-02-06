@@ -1,0 +1,53 @@
+{
+  "name": "globol",
+  "version": "0.0.2",
+  "description": "Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy.",
+  "keywords": [
+    "time",
+    "date",
+    "datetime",
+    "typescript",
+    "javascript",
+    "java.time",
+    "timezone",
+    "zoneid",
+    "time zone",
+    "duration"
+  ],
+  "author": "David Duwaer",
+  "license": "MIT",
+  "homepage": "https://github.com/Artiry/globol#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artiry/globol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Artiry/globol/issues"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "clear": "rimraf dist",
+    "build": "npm run clear && tsc",
+    "build-dev": "npm run clear && tsc --sourceMap",
+    "test": "npm run build-dev && mocha -r ts-node/register tests/**/*.test.ts",
+    "dist": "npm install && npm run test && npm publish"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.2.4",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/mocha": "^5.2.7",
+    "@types/moxios": "^0.4.9",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.2.2",
+    "moxios": "^0.4.0",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}
