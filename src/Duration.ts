@@ -19,6 +19,11 @@ export class Duration
         return Duration.parse(`P${years}Y`);
     }
 
+    public static ofDays(days: number)
+    {
+        return Duration.parse(`P${days}D`);
+    }
+
     public static ofHours(hours: number)
     {
         return Duration.parse(`PT${hours}H`);
