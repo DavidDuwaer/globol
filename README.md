@@ -22,8 +22,21 @@ const currentTimeInNewYork = Instant
 npm install globol
 ```
 
-# Specifications/requirements
-- 
+# How to use
+This library consists of 5 date/time-related datatypes. The library provides plenty of methods to convert between them. When you understand the difference between these types you will never be confused by dates again.
+
+## Representations of points in time
+### Instant
+This is a moment in physical time.
+### ZonedDateTime
+A date, with a time, and a timezone. Together, these three correspond with a moment in physical time. Unlike `Instant`, however, this object carries information in it in which timezone it is represented. For example: there can be a `ZonedDateTime` `2020-01-20T19:00Z+01` and a `ZonedDateTime` `2020-01-20T18:00Z+00`. They both correspond to the same moment in physical time, i.e. the same `Instant`, but they are two distinct `ZonedDateTimes`.
+### LocalDateTime
+### LocalTime
+
+## Other import types
+### Duration
+### ZoneId
+### ZoneOffset
 
 # Feedback
 
