@@ -3,11 +3,10 @@
 Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy. For example:
 
 ```javascript
-const tomorrowInNewYork = Instant
-    .now()
-    .atZone('America/New_York')
-    .toLocalDate()
-    .plus(Duration.ofDays(1));
+const currentTimeInNewYork = Instant
+    .now() // gives an Instant, which is a moment in time, representing now
+    .atZone('America/New_York') // returns a ZonedDateTime
+    .toLocalTime(); // returns a LocalTime
 ```
 
 The fluent syntax will help you solve any problem you have with dates.
