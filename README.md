@@ -1,6 +1,10 @@
 <img height="50px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
 
-Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy. For example:
+General-purpose time library for Javascript/Typescript.
+
+Supports dates, times, durations and time zones, in immutable, non-ambiguous representations, inspired by the masterful java.time library which suddenly made time easy.
+
+Example:
 
 ```javascript
 const currentTimeInNewYork = Instant
@@ -9,17 +13,30 @@ const currentTimeInNewYork = Instant
     .toLocalTime(); // returns a LocalTime
 ```
 
-The fluent syntax will help you solve any problem you have with dates.
-
 [![npm version](https://badge.fury.io/js/globol.svg)](https://badge.fury.io/js/globol)
 [![Build Status](https://travis-ci.org/Artiry/globol.svg?branch=master)](https://travis-ci.org/github/Artiry/globol)
 
 # Install
 
-
 ```shell
 npm install globol
 ```
+
+# How to use
+This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them.
+
+## Representations of points in time
+### Instant
+This is a moment in physical time.
+### ZonedDateTime
+A date, with a time, and a timezone. Together, these three correspond with a moment in physical time. Unlike `Instant`, however, this object carries information in it in which timezone it is represented. For example: there can be a `ZonedDateTime` `2020-01-20T19:00Z+01` and a `ZonedDateTime` `2020-01-20T18:00Z+00`. They both correspond to the same moment in physical time, i.e. the same `Instant`, but they are two distinct `ZonedDateTimes`.
+### LocalDateTime
+### LocalTime
+
+## Other import types
+### Duration
+### ZoneId
+### ZoneOffset
 
 # Feedback
 
