@@ -2,7 +2,7 @@
 
 General-purpose time library for Javascript/Typescript.
 
-Supports dates, times, durations and time zones, in immutable, non-ambiguous representations, inspired by the masterful java.time library which suddenly made dealing with time easy.
+Supports dates, times, durations and time zones, in immutable, non-ambiguous representations, inspired by the masterful java.time library which suddenly made time easy.
 
 Example:
 
