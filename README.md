@@ -23,7 +23,7 @@ npm install globol
 ```
 
 # How to use
-This library consists of 5 date/time-related datatypes. The library provides plenty of methods to convert between them. When you understand the difference between these types you will never be confused by dates again.
+This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them.
 
 ## Representations of points in time
 ### Instant
