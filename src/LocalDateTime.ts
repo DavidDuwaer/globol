@@ -41,6 +41,25 @@ export class LocalDateTime
 			.toInstant();
 	}
 
+	public toLocalDate(): LocalDate
+	{
+		return new LocalDate(
+			this.date.year,
+			this.date.month,
+			this.date.dayOfMonth
+		);
+	}
+
+	public toLocalTime(): LocalTime
+	{
+		return new LocalTime(
+			this.time.hour,
+			this.time.minute,
+			this.time.second,
+			this.time.millisecond
+		);
+	}
+
 	public get dayOfWeek(): DayOfWeek
 	{
 		return DayOfWeek.of(
