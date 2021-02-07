@@ -1,7 +1,8 @@
-import moment from 'moment';
-import { LocalDateTime } from './LocalDateTime';
-import { LocalTime } from './LocalTime';
-import {ZoneId} from "./ZoneId";
+import moment, {Moment} from 'moment';
+import {LocalDateTime} from './LocalDateTime';
+import {LocalTime} from './LocalTime';
+import {DayOfWeek} from "./DayOfWeek";
+import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -40,12 +41,8 @@ export class LocalDate
 
 	public toString(): string
 	{
-		const aMoment = moment({
-			year: this.year,
-			month: this.month - 1,
-			day: this.dayOfMonth,
-		});
-		return aMoment.format('YYYY-MM-DD');
+		return this.toMoment()
+			.format('YYYY-MM-DD');
 	}
 
 	public equals(localDate: LocalDate): boolean
@@ -92,6 +89,23 @@ export class LocalDate
 	{
 		return this.plus({
 			days: -days,
+		});
+	}
+
+	public get dayOfWeek(): DayOfWeek
+	{
+		return DayOfWeek.of(
+			this.toMoment()
+				.isoWeekday() as IsoWeekDayNumber
+		);
+	}
+
+	private toMoment(): Moment
+	{
+		return moment({
+			year: this.year,
+			month: this.month - 1,
+			day: this.dayOfMonth,
 		});
 	}
 }

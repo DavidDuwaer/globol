@@ -4,6 +4,8 @@ import {LocalDate} from './LocalDate';
 import {LocalTime} from './LocalTime';
 import {ZoneId} from './ZoneId';
 import {ZonedDateTime} from "./ZonedDateTime";
+import {DayOfWeek} from "./DayOfWeek";
+import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
 
 export class LocalDateTime
 {
@@ -39,6 +41,14 @@ export class LocalDateTime
 			.toInstant();
 	}
 
+	public get dayOfWeek(): DayOfWeek
+	{
+		return DayOfWeek.of(
+			this.toMoment()
+				.isoWeekday() as IsoWeekDayNumber
+		);
+	}
+
 	public get year()
 	{
 		return this.date.year;
@@ -72,5 +82,18 @@ export class LocalDateTime
 	public get millisecond()
 	{
 		return this.time.millisecond;
+	}
+
+	private toMoment()
+	{
+		return moment({
+			year: this.year,
+			month: this.month - 1,
+			day: this.dayOfMonth,
+			hour: this.hour,
+			minute: this.minute,
+			second: this.second,
+			millisecond: this.millisecond
+		});
 	}
 }
