@@ -52,14 +52,25 @@ export class LocalDate
 			&& this.dayOfMonth === localDate.dayOfMonth;
 	}
 
-	public after(localDate: LocalDate): boolean
+	public isBefore(other: LocalDate): boolean
 	{
-		if (this.year !== localDate.year)
-			return this.year > localDate.year;
-		else if (this.month !== localDate.month)
-			return this.month > localDate.month;
-		else if (this.dayOfMonth !== localDate.dayOfMonth)
-			return this.dayOfMonth > localDate.dayOfMonth;
+		if (this.year !== other.year)
+			return this.year < other.year;
+		else if (this.month !== other.month)
+			return this.month < other.month;
+		else if (this.dayOfMonth !== other.dayOfMonth)
+			return this.dayOfMonth < other.dayOfMonth;
+		else return false;
+	}
+
+	public isAfter(other: LocalDate): boolean
+	{
+		if (this.year !== other.year)
+			return this.year > other.year;
+		else if (this.month !== other.month)
+			return this.month > other.month;
+		else if (this.dayOfMonth !== other.dayOfMonth)
+			return this.dayOfMonth > other.dayOfMonth;
 		else return false;
 	}
 

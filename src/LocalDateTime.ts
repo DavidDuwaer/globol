@@ -60,6 +60,24 @@ export class LocalDateTime
 		);
 	}
 
+	public isBefore(other: LocalDateTime)
+	{
+		if (!this.toLocalDate().equals(other.toLocalDate()))
+			return this.toLocalDate().isBefore(other.toLocalDate());
+		else if (!this.toLocalTime().equals(other.toLocalTime()))
+			return this.toLocalTime().isBefore(other.toLocalTime());
+		else return false;
+	}
+
+	public isAfter(other: LocalDateTime)
+	{
+		if (!this.toLocalDate().equals(other.toLocalDate()))
+			return this.toLocalDate().isAfter(other.toLocalDate());
+		else if (!this.toLocalTime().equals(other.toLocalTime()))
+			return this.toLocalTime().isAfter(other.toLocalTime());
+		else return false;
+	}
+
 	public get dayOfWeek(): DayOfWeek
 	{
 		return DayOfWeek.of(
