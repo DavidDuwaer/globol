@@ -76,6 +76,34 @@ export class LocalTime
 			&& this.second === localTime.second
 			&& this.millisecond === localTime.millisecond;
 	}
+
+	public isBefore(other: LocalTime)
+	{
+		return this.hour < other.hour
+			|| (this.hour === other.hour && (
+				this.minute < other.minute
+				|| (this.minute === other.minute && (
+					this.second < other.second
+					|| (this.second === other.second
+						&& this.millisecond < other.millisecond
+					)
+				))
+			))
+	}
+
+	public isAfter(other: LocalTime)
+	{
+		return this.hour > other.hour
+			|| (this.hour === other.hour && (
+				this.minute > other.minute
+				|| (this.minute === other.minute && (
+					this.second > other.second
+					|| (this.second === other.second
+						&& this.millisecond > other.millisecond
+					)
+				))
+			))
+	}
 }
 
 function padToTwoDigits(aNumber: number): string
