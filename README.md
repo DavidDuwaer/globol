@@ -9,9 +9,9 @@ General-purpose time library for Javascript/Typescript.
 Example:
 
 ```javascript
-const currentTimeInNewYork = Instant
-    .now() // gives an Instant, which is a moment in time, representing now
-    .atZone('America/New_York') // returns a ZonedDateTime
+const currentTimeInNewYork = LocalDateTime
+    .now()
+    .atZone(ZoneId.of('America/New_York')) // returns a ZonedDateTime
     .toLocalTime(); // returns a LocalTime
 ```
 
