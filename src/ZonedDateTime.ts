@@ -56,7 +56,7 @@ export class ZonedDateTime
 
 	public toLocalDateTime()
 	{
-		return new LocalDateTime(
+		return LocalDateTime.of(
 			this.toLocalDate(),
 			this.toLocalTime()
 		);

@@ -76,7 +76,7 @@ export class LocalDate
 
 	public atTime(localTime: LocalTime): LocalDateTime
 	{
-		return new LocalDateTime(
+		return LocalDateTime.of(
 			this,
 			localTime
 		);

@@ -12,10 +12,15 @@ export class LocalDateTime
 	private readonly date: LocalDate;
 	private readonly time: LocalTime;
 
-	constructor(date: LocalDate, time: LocalTime)
+	private constructor(date: LocalDate, time: LocalTime)
 	{
 		this.date = date;
 		this.time = time;
+	}
+
+	public static of(date: LocalDate, time: LocalTime)
+	{
+		return new LocalDateTime(date, time);
 	}
 
 	public atZone(zoneId: ZoneId): ZonedDateTime
