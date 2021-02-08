@@ -67,11 +67,17 @@ export class ZonedDateTime
 		return this.zonedMoment.year();
 	}
 
+	/**
+	 * Month number, 1...12
+	 */
 	public get month()
 	{
 		return this.zonedMoment.month() + 1 as MonthNumber;
 	}
 
+	/**
+	 * The day of the month, 1...31
+	 */
 	public get day()
 	{
 		return this.zonedMoment.date() as DayOfMonthNumber;

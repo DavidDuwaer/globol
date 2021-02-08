@@ -22,7 +22,7 @@ export class DayOfWeek
         DayOfWeek.SUNDAY
     ];
 
-    public readonly isoDayOfWeek: number;
+    private readonly isoDayOfWeek: number;
 
     private constructor(isoWeekDayNumber: IsoWeekDayNumber)
     {
@@ -69,6 +69,14 @@ export class DayOfWeek
     {
         const newISOWeekDayNumber = ((this.isoDayOfWeek - nrOfDays - 1) % 7) + 1;
         return DayOfWeek.daySuccession[newISOWeekDayNumber - 1];
+    }
+
+    /**
+     * ISO day of week number, 1...7 with 1 being Monday
+     */
+    public get isoNumber()
+    {
+        return this.isoDayOfWeek;
     }
 }
 
