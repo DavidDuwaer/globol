@@ -2,9 +2,16 @@
 
 General-purpose time library for Javascript/Typescript.
 
-* Dates, times, time zones, durations and operations between all
-* Immutable
-* Fluent. No more searching docs, but intuitive use with auto-complete
+* Dates, times, time zones, durations, week days...
+* **No comparing apples with pears**, unlike `moment` and `date-fns`. Clear and unambigous separation between
+  * Dates
+  * Times
+  * With timezone
+  * Without timezone
+  * Points in time vs points on the calendar
+* **Immutable**, unlike `moment.js`.
+* **Fluent**. Unlike `date-fns`, no more searching docs, but intuitive use with auto-complete
+* ISO-8601-compliant serilization/deserialization of all data representations
 
 Example:
 
