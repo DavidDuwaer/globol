@@ -74,7 +74,7 @@ export class ZonedDateTime
 
 	public get day()
 	{
-		return this.zonedMoment.day() as DayOfMonthNumber;
+		return this.zonedMoment.date() as DayOfMonthNumber;
 	}
 
 	public get hour()
