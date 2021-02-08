@@ -69,7 +69,7 @@ export class ZonedDateTime
 
 	public get month()
 	{
-		return this.zonedMoment.month() as MonthNumber;
+		return this.zonedMoment.month() + 1 as MonthNumber;
 	}
 
 	public get day()
