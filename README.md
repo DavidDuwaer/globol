@@ -10,7 +10,7 @@ General-purpose time library for Javascript/Typescript.
   * Without timezone
   * Points in time vs points on the calendar
 * **Immutable**, unlike `moment.js`.
-* **Fluent**. Unlike `date-fns`, no more searching docs, but intuitive use with auto-complete
+* **Fluent**. Unlike `date-fns`, no more searching docs, but intuitive use with auto-complete and in-place method/class/function documentation
 * ISO-8601-compliant serilization/deserialization of all data representations
 
 Example:
