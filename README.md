@@ -3,7 +3,7 @@
 General-purpose time library for Javascript/Typescript.
 
 * Dates, times, time zones, durations, week days...
-* **No comparing apples with pears**, unlike `moment` and `date-fns`. Clear and unambigous separation between
+* **No more comparing apples and oranges**. Unlike `moment` and `date-fns`, clear & unambigous separation between
   * Dates
   * Times
   * With timezone
