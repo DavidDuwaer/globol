@@ -1,5 +1,8 @@
+export {DayOfWeek} from './DayOfWeek';
+export {DayOfWeekId} from './DayOfWeekId';
 export {Duration} from './Duration';
 export {Instant} from './Instant';
+export {IsoWeekDayNumber} from './IsoWeekDayNumber';
 export {LocalDate, MonthNumber, DayOfMonthNumber} from './LocalDate';
 export {LocalDateTime} from './LocalDateTime';
 export {LocalTime, HourNumber, MinuteNumber} from './LocalTime';
