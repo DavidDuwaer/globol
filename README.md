@@ -3,7 +3,7 @@
 Date & time library for Javascript/Typescript.
 
 * Dates, times, time zones, durations, week days...
-* **No more comparing apples and oranges**. Unlike other major js time libraries, Globol has a clear & unambigous separation between
+* **No more comparing apples and oranges**. Unlike other major JS time libraries, Globol has a clear & unambigous separation between
   * 'Dates' vs. 'Times' vs. 'DateTimes'
   * With vs. without timezone
   * 'Points in time' vs. 'points on the calendar'
