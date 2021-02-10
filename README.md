@@ -1,6 +1,6 @@
 <img height="50px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
 
-General-purpose time library for Javascript/Typescript.
+Date & time library for Javascript/Typescript.
 
 * Dates, times, time zones, durations, week days...
 * **No more comparing apples and oranges**. Unlike `moment` and `date-fns`, clear & unambigous separation between
