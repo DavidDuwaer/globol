@@ -1,6 +1,17 @@
-<img height="50px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
-
+<p align="center">
+<img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
+ </p>
+<p align="center">
 Date & time library for Javascript/Typescript.
+ </p>
+ <p align="center">
+ <a href="https://badge.fury.io/js/globol">
+  <img src="https://badge.fury.io/js/globol.svg"/>
+ </a>
+  <a href="https://travis-ci.org/github/Artiry/globol">
+  <img src="https://travis-ci.org/Artiry/globol.svg?branch=master"/>
+ </a>
+ </p>
 
 * Dates, times, time zones, durations, week days...
 * **No more comparing apples and oranges**. Unlike other major JS time libraries, Globol has a clear & unambigous separation between
@@ -21,8 +32,6 @@ const currentTimeInNewYork = LocalDateTime
     .toLocalTime(); // returns a LocalTime
 ```
 
-[![npm version](https://badge.fury.io/js/globol.svg)](https://badge.fury.io/js/globol)
-[![Build Status](https://travis-ci.org/Artiry/globol.svg?branch=master)](https://travis-ci.org/github/Artiry/globol)
 
 # Install
 
