@@ -19,7 +19,7 @@ Date & time library for Javascript/Typescript.
   * With vs. without timezone
   * 'Points in time' vs. 'points on the calendar'
 * **Immutable**
-* **Fluent**. No more searching docs for functions that suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation
+* **Fluent**. No more searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation
 * ISO-8601-compliant serilization/deserialization of all data representations
 * Uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 
