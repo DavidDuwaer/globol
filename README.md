@@ -18,8 +18,8 @@ Date & time library for Javascript/Typescript.
   * 'Dates' vs. 'Times' vs. 'DateTimes'
   * With vs. without timezone
   * 'Points in time' vs. 'points on the calendar'
-* **Immutable**, unlike `moment.js`.
-* **Fluent**. Unlike `date-fns`, no more searching docs, but intuitive use with auto-complete and in-place method/class/function documentation
+* **Immutable**
+* **Fluent**. No more searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation
 * ISO-8601-compliant serilization/deserialization of all data representations
 * Uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 
