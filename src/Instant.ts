@@ -35,7 +35,7 @@ export class Instant
 				date.getMonth() + duration.months,
 				date.getDate() + duration.days,
 				date.getHours() + duration.hours,
-				date.getHours() + duration.minutes,
+				date.getMinutes() + duration.minutes,
 				date.getSeconds() + duration.seconds,
 				date.getMilliseconds() + duration.milliseconds,
 			)
