@@ -22,7 +22,7 @@ export class DayOfWeek
         DayOfWeek.SUNDAY
     ];
 
-    private readonly isoDayOfWeek: number;
+    private readonly isoDayOfWeek: IsoWeekDayNumber;
 
     private constructor(isoWeekDayNumber: IsoWeekDayNumber)
     {
