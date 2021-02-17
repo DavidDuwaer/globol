@@ -1,24 +1,6 @@
-import {DayOfWeekId} from "./DayOfWeekId";
+import {DAY_OF_WEEK_ID_SUCCESSION, DayOfWeekId} from "./DayOfWeekId";
 import {requireInt} from "./util/requireInt";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
-
-export type DayOfWeekString = 'MONDAY'
-    | 'TUESDAY'
-    | 'WEDNESDAY'
-    | 'THURSDAY'
-    | 'FRIDAY'
-    | 'SATURDAY'
-    | 'SUNDAY';
-
-const enumNames: DayOfWeekString[] = [
-    'MONDAY',
-    'TUESDAY',
-    'WEDNESDAY',
-    'THURSDAY',
-    'FRIDAY',
-    'SATURDAY',
-    'SUNDAY',
-];
 
 export class DayOfWeek
 {
@@ -30,31 +12,24 @@ export class DayOfWeek
     public static readonly SATURDAY = new DayOfWeek(6);
     public static readonly SUNDAY = new DayOfWeek(7);
 
-    private static daySuccession = [
-        DayOfWeek.MONDAY,
-        DayOfWeek.TUESDAY,
-        DayOfWeek.WEDNESDAY,
-        DayOfWeek.THURSDAY,
-        DayOfWeek.FRIDAY,
-        DayOfWeek.SATURDAY,
-        DayOfWeek.SUNDAY
-    ];
-
-    private readonly isoDayOfWeek: IsoWeekDayNumber;
+    /**
+     * ISO day of week number, 1...7 with 1 being Monday
+     */
+    public readonly isoNumber: IsoWeekDayNumber;
 
     private constructor(isoWeekDayNumber: IsoWeekDayNumber)
     {
         requireValidISOWeekDayNumber(isoWeekDayNumber);
-        this.isoDayOfWeek = isoWeekDayNumber;
+        this.isoNumber = isoWeekDayNumber;
     }
 
     public static of(isoWeekDayNumber: IsoWeekDayNumber)
     {
         requireValidISOWeekDayNumber(isoWeekDayNumber);
-        return DayOfWeek.daySuccession[isoWeekDayNumber - 1];
+        return getDayOfWeek(isoWeekDayNumber);
     }
 
-    public static parse(stringValue: DayOfWeekId)
+    public static parse(stringValue: string)
     {
         switch (stringValue)
         {
@@ -79,27 +54,22 @@ export class DayOfWeek
 
     public plus(nrOfDays: number)
     {
-        const newISOWeekDayNumber = ((this.isoDayOfWeek + nrOfDays - 1) % 7) + 1;
-        return DayOfWeek.daySuccession[newISOWeekDayNumber - 1];
+        const newISOWeekDayNumber = ((this.isoNumber + nrOfDays - 1) % 7) + 1 as IsoWeekDayNumber;
+        return getDayOfWeek(newISOWeekDayNumber);
     }
 
     public minus(nrOfDays: number)
     {
-        const newISOWeekDayNumber = ((this.isoDayOfWeek - nrOfDays - 1) % 7) + 1;
-        return DayOfWeek.daySuccession[newISOWeekDayNumber - 1];
-    }
-
-    public toEnumString()
-    {
-        return enumNames[this.isoDayOfWeek - 1];
+        const newISOWeekDayNumber = ((this.isoNumber - nrOfDays - 1) % 7) + 1 as IsoWeekDayNumber;
+        return getDayOfWeek(newISOWeekDayNumber);
     }
 
     /**
-     * ISO day of week number, 1...7 with 1 being Monday
+     * A string equal to the enum constant name, e.g. 'MONDAY'
      */
-    public get isoNumber()
+    public get id(): DayOfWeekId
     {
-        return this.isoDayOfWeek;
+        return DAY_OF_WEEK_ID_SUCCESSION[this.isoNumber - 1];
     }
 }
 
@@ -109,4 +79,9 @@ function requireValidISOWeekDayNumber(isoWeekDayNumber: number)
     if (isoWeekDayNumber < 1 || isoWeekDayNumber > 7) {
         throw new Error(`'${isoWeekDayNumber}' not a valid ISO weekday number`);
     }
+}
+
+function getDayOfWeek(isoWeekDayNumber: IsoWeekDayNumber)
+{
+    return DayOfWeek[DAY_OF_WEEK_ID_SUCCESSION[isoWeekDayNumber - 1]];
 }
