@@ -2,6 +2,24 @@ import {DayOfWeekId} from "./DayOfWeekId";
 import {requireInt} from "./util/requireInt";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
 
+export type DayOfWeekString = 'MONDAY'
+    | 'TUESDAY'
+    | 'WEDNESDAY'
+    | 'THURSDAY'
+    | 'FRIDAY'
+    | 'SATURDAY'
+    | 'SUNDAY';
+
+const enumNames: DayOfWeekString[] = [
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+    'SUNDAY',
+];
+
 export class DayOfWeek
 {
     public static readonly MONDAY = new DayOfWeek(1);
@@ -69,6 +87,11 @@ export class DayOfWeek
     {
         const newISOWeekDayNumber = ((this.isoDayOfWeek - nrOfDays - 1) % 7) + 1;
         return DayOfWeek.daySuccession[newISOWeekDayNumber - 1];
+    }
+
+    public toEnumString()
+    {
+        return enumNames[this.isoDayOfWeek - 1];
     }
 
     /**
