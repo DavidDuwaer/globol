@@ -13,15 +13,13 @@ Date & time library for Javascript/Typescript.
  </a>
  </p>
 
-* Dates, times, time zones, durations, week days...
-* **No more comparing apples and oranges**. Unlike other major JS time libraries, Globol has a clear & unambigous separation between
-  * 'Dates' vs. 'Times' vs. 'DateTimes'
-  * With vs. without timezone
-  * 'Points in time' vs. 'points on the calendar'
+* Dates, times, time zones, durations, week days... Ideas taken from the amazing java.time library.
+* **No more comparing apples and oranges** when it comes to dates. You want to express a moment in time, a date on the calendar, a time on the clock? With or without a timezone, or maybe a zone offset? No longer are these concepts all thrown into one object, or worse, no object at all.
 * **Immutable**
 * **Fluent**. No more searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation
 * ISO-8601-compliant serilization/deserialization of all data representations
-* Uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
+* Under the hood, currently uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
+* **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
 
 Example:
 
@@ -56,6 +54,9 @@ A datetime with a zone offset, e.g. `2020-01-20T19:34Z+01`. Because it has an of
 A fixed length of physical time.
 ### ZoneId & ZoneOffset
 These represent timezones. The difference between ZoneId and ZoneOffset is as follows: ZoneId represents something like `Europe/Amsterdam`, which can have a `ZoneOffset` of +1 in the winter and +2 in the summer.
+
+# Future work
+We'd like to make it optional to use the moment-timezone library. To make a separate library `globol-timezone` that has `globol` as an `npm` peer dependency, which, when included, runtime-enriches Globol with the `moment-timezone` time zone information.
 
 # Feedback
 
