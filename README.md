@@ -16,8 +16,8 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 * Dates, times, time zones, durations, week days...
 * Based on ideas taken from the amazing Java `java.time` library.
 * **No more comparing apples and oranges** when it comes to dates. You want to express a moment in time, a date on the calendar, a time on the clock? With or without a timezone, or maybe a zone offset? No longer are these concepts all thrown into one object, or worse, no object at all.
-* **Immutable**
-* **Fluent**. No more searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation
+* **Immutable**. The 00s are long gone, but still gets a mention.
+* **Fluent**. No searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation.
 * ISO-8601-compliant serilization/deserialization of all data representations
 * Under the hood, currently uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 * **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
