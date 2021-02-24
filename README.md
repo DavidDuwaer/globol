@@ -2,7 +2,7 @@
 <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
  </p>
 <p align="center">
-Date & time library for Javascript/Typescript.
+Date & time library for Javascript/Typescript, made with the user (that's you! the programmer!) in mind.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
