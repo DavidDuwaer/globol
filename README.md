@@ -42,7 +42,7 @@ npm install globol
 This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them. The following are the most important datatypes, the ones that you should know of.
 
 ### Instant
-This is a moment in physical time.
+This is a moment in physical time. This is the thing you will likely use most often.
 ### LocalDateTime
 A date with a time, e.g. `2020-01-20T19:34`
 ### LocalDate
