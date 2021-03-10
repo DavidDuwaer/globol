@@ -53,8 +53,57 @@ export class Duration
     }
 
     /**
+     * This {@link Duration} expressed in number of days, rounded down. In other words: the
+     * total number of whole days that fit in this {@link Duration}. Not to be confused with
+     * {@link .days}. A fixed day length of 24 hours is used.
+     */
+    public get asDays()
+    {
+        return Math.floor(this.asHours / 24);
+    }
+
+    /**
+     * This {@link Duration} expressed in number of hours, rounded down. In other words: the
+     * total number of whole hours that fit in this {@link Duration}. Not to be confused with
+     * {@link .hours}.
+     */
+    public get asHours()
+    {
+        return Math.floor(this.momentDuration.asHours());
+    }
+
+    /**
+     * This {@link Duration} expressed in number of minutes, rounded down. In other words: the
+     * total number of whole minutes that fit in this {@link Duration}. Not to be confused with
+     * {@link .minutes}.
+     */
+    public get asMinutes()
+    {
+        return Math.floor(this.momentDuration.asMinutes());
+    }
+
+    /**
+     * This {@link Duration} expressed in number of seconds, rounded down. In other words: the
+     * total number of whole seconds that fit in this {@link Duration}. Not to be confused with
+     * {@link .seconds}.
+     */
+    public get asSeconds()
+    {
+        return Math.floor(this.momentDuration.asSeconds());
+    }
+
+    /**
+     * This {@link Duration} expressed in number of milliseconds. Not to be confused with
+     * {@link .milliseconds}.
+     */
+    public get asMillis()
+    {
+        return Math.floor(this.momentDuration.asMilliseconds());
+    }
+
+    /**
      * The years component in this {@link Duration}. Note: NOT 'the entire length of this duration
-     * expressed in years'.
+     * expressed in years' —for that, use {@link .asYears}.
      */
     public get years()
     {
@@ -81,7 +130,7 @@ export class Duration
 
     /**
      * The hours component in this {@link Duration}. Note: NOT 'the entire length of this duration
-     * expressed in hours'.
+     * expressed in hours' —for that, use {@link .asHours}.
      */
     public get hours()
     {
@@ -90,7 +139,7 @@ export class Duration
 
     /**
      * The minutes component in this {@link Duration}. Note: NOT 'the entire length of this duration
-     * expressed in minutes'.
+     * expressed in minutes' —for that, use {@link .asMinutes}.
      */
     public get minutes()
     {
@@ -99,7 +148,7 @@ export class Duration
 
     /**
      * The seconds component in this {@link Duration}. Note: NOT 'the entire length of this duration
-     * expressed in seconds'.
+     * expressed in seconds' —for that, use {@link .asSeconds}.
      */
     public get seconds()
     {
@@ -108,7 +157,7 @@ export class Duration
 
     /**
      * The milliseconds component in this {@link Duration}. Note: NOT 'the entire length of this duration
-     * expressed in milliseconds'.
+     * expressed in milliseconds' —for that, use {@link .asMillis}.
      */
     public get milliseconds()
     {
