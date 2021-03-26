@@ -29,17 +29,7 @@ export class Instant
 	public add(duration: Duration): Instant
 	{
 		const date = this.jsDate;
-		return new Instant(
-			new Date(
-				date.getFullYear() + duration.years,
-				date.getMonth() + duration.months,
-				date.getDate() + duration.days,
-				date.getHours() + duration.hours,
-				date.getMinutes() + duration.minutes,
-				date.getSeconds() + duration.seconds,
-				date.getMilliseconds() + duration.milliseconds,
-			)
-		);
+		return new Instant(new Date(date.getTime() + duration.asMillis));
 	}
 
 	public atZone(zoneId: ZoneId)
