@@ -1,6 +1,6 @@
 import {DAY_OF_WEEK_ID_SUCCESSION, DayOfWeekId} from "./DayOfWeekId";
-import {requireInt} from "./util/requireInt";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
 
 export class DayOfWeek
 {
@@ -19,14 +19,14 @@ export class DayOfWeek
 
     private constructor(isoWeekDayNumber: IsoWeekDayNumber)
     {
-        requireValidISOWeekDayNumber(isoWeekDayNumber);
-        this.isoNumber = isoWeekDayNumber;
+        this.isoNumber = requireValidISOWeekDayNumber(isoWeekDayNumber);
     }
 
     public static of(isoWeekDayNumber: IsoWeekDayNumber)
     {
-        requireValidISOWeekDayNumber(isoWeekDayNumber);
-        return getDayOfWeek(isoWeekDayNumber);
+        return getDayOfWeek(
+            requireValidISOWeekDayNumber(isoWeekDayNumber)
+        );
     }
 
     public static parse(stringValue: string)
@@ -70,14 +70,6 @@ export class DayOfWeek
     public get id(): DayOfWeekId
     {
         return DAY_OF_WEEK_ID_SUCCESSION[this.isoNumber - 1];
-    }
-}
-
-function requireValidISOWeekDayNumber(isoWeekDayNumber: number)
-{
-    requireInt(isoWeekDayNumber);
-    if (isoWeekDayNumber < 1 || isoWeekDayNumber > 7) {
-        throw new Error(`'${isoWeekDayNumber}' not a valid ISO weekday number`);
     }
 }
 

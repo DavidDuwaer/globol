@@ -1,8 +1,10 @@
-import moment, {Moment} from 'moment';
+import {Moment} from 'moment';
 import {LocalDateTime} from './LocalDateTime';
 import {LocalTime} from './LocalTime';
 import {DayOfWeek} from "./DayOfWeek";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
+import {newValidMoment} from "./util/newValidMoment";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -105,18 +107,32 @@ export class LocalDate
 
 	public get dayOfWeek(): DayOfWeek
 	{
-		return DayOfWeek.of(
-			this.toMoment()
-				.isoWeekday() as IsoWeekDayNumber
+		return DayOfWeek.of(this.isoWeekDayNumber);
+	}
+
+	private get isoWeekDayNumber(): IsoWeekDayNumber
+	{
+		const result = this.toMoment().isoWeekday();
+		return requireValidISOWeekDayNumber(
+			result,
+			`Failed to get valid isoWeekDayNumber from LocalDate ${this.debugDescription}`
 		);
 	}
 
 	private toMoment(): Moment
 	{
-		return moment({
-			year: this.year,
-			month: this.month - 1,
-			day: this.dayOfMonth,
-		});
+		return newValidMoment(
+			{
+				year: this.year,
+				month: this.month - 1,
+				day: this.dayOfMonth,
+			},
+			`Failed to get valid Moment from LocalDate ${this.debugDescription}`
+		);
+	}
+
+	private get debugDescription()
+	{
+		return `{"year":${this.year},"month":${this.month},"day":${this.dayOfMonth}}`;
 	}
 }

@@ -6,6 +6,9 @@ import {ZoneId} from './ZoneId';
 import {ZonedDateTime} from "./ZonedDateTime";
 import {DayOfWeek} from "./DayOfWeek";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
+import {newValidMoment} from "./util/newValidMoment";
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
+import {requireValidMoment} from "./util/requireValidMoment";
 
 export class LocalDateTime
 {
@@ -25,17 +28,7 @@ export class LocalDateTime
 
 	public atZone(zoneId: ZoneId): ZonedDateTime
 	{
-		const zonedMoment = moment.tz(
-			{
-				year: this.year,
-				month: this.month - 1,
-				day: this.dayOfMonth,
-				hour: this.hour,
-				minute: this.minute,
-				millisecond: this.millisecond
-			},
-			zoneId.toString()
-		);
+		const zonedMoment = this.toZonedMoment(zoneId);
 		return new ZonedDateTime(zonedMoment.toDate(), zoneId);
 	}
 
@@ -126,16 +119,51 @@ export class LocalDateTime
 		return this.time.millisecond;
 	}
 
+	private get isoWeekDayNumber(): IsoWeekDayNumber
+	{
+		const result = this.toMoment().isoWeekday();
+		return requireValidISOWeekDayNumber(
+			result,
+			`Failed to get valid isoWeekDayNumber from LocalDateTime ${this.debugDescription}`
+		);
+	}
+
 	private toMoment()
 	{
-		return moment({
-			year: this.year,
-			month: this.month - 1,
-			day: this.dayOfMonth,
-			hour: this.hour,
-			minute: this.minute,
-			second: this.second,
-			millisecond: this.millisecond
-		});
+		return newValidMoment(
+			{
+				year: this.year,
+				month: this.month - 1,
+				day: this.dayOfMonth,
+				hour: this.hour,
+				minute: this.minute,
+				second: this.second,
+				millisecond: this.millisecond
+			},
+			`Failed to get valid Moment from LocalDateTime ${this.debugDescription}`
+		);
+	}
+
+	private toZonedMoment(zoneId: ZoneId)
+	{
+		return requireValidMoment(
+			moment.tz(
+				{
+					year: this.year,
+					month: this.month - 1,
+					day: this.dayOfMonth,
+					hour: this.hour,
+					minute: this.minute,
+					millisecond: this.millisecond
+				},
+				zoneId.toString()
+			),
+			`Failed to get valid timezone Moment from LocalDateTime ${this.debugDescription}`
+		);
+	}
+
+	private get debugDescription()
+	{
+		return `{"year":${this.year},"month":${this.month},"day":${this.dayOfMonth},"time":${this.time.toString()}`;
 	}
 }
