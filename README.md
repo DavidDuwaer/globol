@@ -35,11 +35,24 @@ const currentTimeInNewYork = LocalDateTime
 
 # Install
 
-```shell
+```typescript
 npm install globol
 ```
 
-# How to use
+# Usage examples
+Get the current timestamp
+```typescript
+Instant.now() // returns an Instant
+```
+
+Get the current time on the clock (e.g. '14:57') in Berlin
+```typescript
+Instant.now()
+    .atZone(ZoneId.of('Europe/Berlin'))
+    .toLocalTime() // returns a LocalTime
+```
+
+# Core concepts
 This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them. The following are the most important datatypes, the ones that you should know of.
 
 ### Instant
