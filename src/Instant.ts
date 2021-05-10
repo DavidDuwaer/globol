@@ -64,6 +64,23 @@ export class Instant
 		return new ZonedDateTime(this.toJS(), zoneId);
 	}
 
+	/**
+	 * Gets the number of milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+	 */
+	public toEpochMilli(): number
+	{
+		return this.epochMilli;
+	}
+
+	/**
+	 * Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z, rounded down (the milliseconds in the
+	 * last second truncated). This returns an integer.
+	 */
+	public getEpochSecond(): number
+	{
+		return Math.floor(this.epochMilli / 1000);
+	}
+
 	public toJS(): Date
 	{
 		return requireValidDate(
