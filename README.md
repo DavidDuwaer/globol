@@ -48,7 +48,7 @@ Instant.now() // returns an Instant
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
 Instant.now()
-    .atZone(ZoneId.of('Europe/Berlin'))
+    .atZone(ZoneId.of('Europe/Berlin')) // returns a ZonedDateTime, i.e. an instant, but expressed in a certain time zone
     .toLocalTime() // returns a LocalTime
 ```
 
