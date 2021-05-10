@@ -5,6 +5,9 @@ import {DayOfWeek} from "./DayOfWeek";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
 import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
 import {newValidMoment} from "./util/newValidMoment";
+import {requireInt} from "./util/requireInt";
+import {requireValidMonthNumber} from "./util/requireValidMonthNumber";
+import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -17,9 +20,9 @@ export class LocalDate
 
 	constructor(year: number, month: MonthNumber, dayOfMonth: DayOfMonthNumber)
 	{
-		this.year = year;
-		this.month = month;
-		this.dayOfMonth = dayOfMonth;
+		this.year = requireInt(year);
+		this.month = requireValidMonthNumber(month);
+		this.dayOfMonth = requireValidDayOfMonthNumber(dayOfMonth);
 	}
 
 	public static from(date: Date): LocalDate

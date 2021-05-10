@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import {requireValidZoneIdString} from "./util/requireValidZoneIdString";
 
 export type ZoneIdString = 'Europe/Amsterdam'; // todo: add all other IDs that occur in tz database
 
@@ -8,7 +9,7 @@ export class ZoneId
 
 	private constructor(zoneId: ZoneIdString)
 	{
-		this.zoneId = zoneId;
+		this.zoneId = requireValidZoneIdString(zoneId);
 	}
 
 	public static browser()

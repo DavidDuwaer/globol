@@ -1,44 +1,73 @@
 import {ZonedDateTime} from './ZonedDateTime';
 import {Duration} from "./Duration";
 import {ZoneId} from "./ZoneId";
+import {requireValidDate} from "./util/requireValidDate";
+import {requireInt} from "./util/requireInt";
 
 export class Instant
 {
-	private readonly jsDate: Date;
+	private readonly epochMilli: number;
 
-	private constructor(jsDate: Date)
+	private constructor(epochMilli: number)
 	{
-		this.jsDate = jsDate;
+		this.epochMilli = requireInt(epochMilli);
 	}
 
 	public static now()
 	{
-		return new Instant(new Date());
+		return new Instant(new Date().getTime());
 	}
 
 	public static parse(stringValue: string)
 	{
-		return new Instant(new Date(stringValue));
+		const date = new Date(stringValue);
+		return new Instant(
+			requireValidDate(date).getTime()
+		);
 	}
 
 	public static from(date: Date)
 	{
-		return new Instant(date);
+		return new Instant(
+			requireValidDate(date).getTime()
+		);
+	}
+
+	public static ofEpochMilli(epochMilli: number)
+	{
+		return new Instant(
+			requireInt(
+				epochMilli,
+				`Expected valid integer for epochMilli, but got ${epochMilli}`
+			)
+		);
+	}
+
+	public static ofEpochSecond(epochSecond: number)
+	{
+		const validEpochSecond = requireInt(
+			epochSecond,
+			`Expected valid integer for epoch second, but got ${epochSecond}`
+		);
+		return new Instant(
+			validEpochSecond * 1000
+		);
 	}
 
 	public add(duration: Duration): Instant
 	{
-		const date = this.jsDate;
-		return new Instant(new Date(date.getTime() + duration.asMillis));
+		return new Instant(this.epochMilli + duration.asMillis);
 	}
 
 	public atZone(zoneId: ZoneId)
 	{
-		return new ZonedDateTime(this.jsDate, zoneId);
+		return new ZonedDateTime(this.toJS(), zoneId);
 	}
 
 	public toJS(): Date
 	{
-		return new Date(this.jsDate);
+		return requireValidDate(
+			new Date(this.epochMilli)
+		);
 	}
 }

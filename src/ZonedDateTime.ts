@@ -4,6 +4,8 @@ import {DayOfMonthNumber, LocalDate, MonthNumber} from './LocalDate';
 import {LocalDateTime} from './LocalDateTime';
 import {HourNumber, LocalTime, MinuteNumber} from './LocalTime';
 import {ZoneId, ZoneIdString} from './ZoneId';
+import {requireValidMoment} from "./util/requireValidMoment";
+import {requireValidDate} from "./util/requireValidDate";
 
 export class ZonedDateTime
 {
@@ -11,9 +13,13 @@ export class ZonedDateTime
 
 	constructor(jsDate: Date, zoneId: ZoneId)
 	{
-		this.zonedMoment = moment.tz(
-			jsDate,
-			zoneId.toString()
+		const validJsDate = requireValidDate(jsDate);
+		this.zonedMoment = requireValidMoment(
+			moment.tz(
+				validJsDate,
+				zoneId.toString()
+			),
+			`Failed to get valid Moment from JS Date object ${validJsDate.toISOString()} and Zone ID ${zoneId}`
 		);
 	}
 
