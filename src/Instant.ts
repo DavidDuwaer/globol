@@ -64,6 +64,16 @@ export class Instant
 		return new ZonedDateTime(this.toJS(), zoneId);
 	}
 
+	public isAfter(otherInstant: Instant): boolean
+	{
+		return this.epochMilli > otherInstant.epochMilli;
+	}
+
+	public isBefore(otherInstant: Instant): boolean
+	{
+		return this.epochMilli < otherInstant.epochMilli;
+	}
+
 	/**
 	 * Gets the number of milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
 	 */
