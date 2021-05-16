@@ -68,6 +68,9 @@ export class LocalTime
 		);
 	}
 
+	/**
+	 * To ISO-8601 string, e.g. "17:34:00.000" or "13:53"
+	 */
 	public toString()
 	{
 		let value = padToTwoDigits(this.hour)

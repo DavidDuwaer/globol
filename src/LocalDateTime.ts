@@ -119,6 +119,14 @@ export class LocalDateTime
 		return this.time.millisecond;
 	}
 
+	/**
+	 * To ISO-8601 string, e.g. "2020-01-23T17:34:00.000"
+	 */
+	public toString(): string
+	{
+		return `${this.date.toString()}T${this.time.toString()}`;
+	}
+
 	private get isoWeekDayNumber(): IsoWeekDayNumber
 	{
 		const result = this.toMoment().isoWeekday();

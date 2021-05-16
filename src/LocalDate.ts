@@ -44,6 +44,9 @@ export class LocalDate
 		);
 	}
 
+	/**
+	 * To ISO-8601 string, e.g. "2020-01-23"
+	 */
 	public toString(): string
 	{
 		return this.toMoment()

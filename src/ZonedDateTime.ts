@@ -109,6 +109,14 @@ export class ZonedDateTime
 		return this.zonedMoment.millisecond();
 	}
 
+	/**
+	 * To ISO-8601 string, e.g. "2020-01-23T17:34:00.000Z"
+	 */
+	public toString(): string
+	{
+		return this.zonedMoment.toISOString(true);
+	}
+
 	public toJS(): Date
 	{
 		return this.zonedMoment.toDate();

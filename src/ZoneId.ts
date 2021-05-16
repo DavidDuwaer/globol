@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import {requireValidZoneIdString} from "./util/requireValidZoneIdString";
 
-export type ZoneIdString = 'Europe/Amsterdam'; // todo: add all other IDs that occur in tz database
+export type ZoneIdString = 'Europe/Amsterdam' | 'UTC' | 'America/New_York'; // todo: add all other IDs that occur in tz database
 
 export class ZoneId
 {

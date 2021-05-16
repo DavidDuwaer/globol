@@ -83,6 +83,14 @@ export class Instant
 	}
 
 	/**
+	 * A string representation of this {@link Instant} in ISO-8601 notation. E.g. "2021-05-16T11:21:32.329Z"
+	 */
+	public toString(): string
+	{
+		return this.toJS().toISOString();
+	}
+
+	/**
 	 * Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z, rounded down (the milliseconds in the
 	 * last second truncated). This returns an integer.
 	 */

@@ -1,5 +1,6 @@
 import {Duration, Instant} from "../dist";
 import {assert} from "chai";
+import {LocalDate, LocalDateTime, LocalTime, ZonedDateTime, ZoneId} from "../src";
 
 describe('that tests run', () => {
 });
@@ -26,6 +27,15 @@ describe('instant', () => {
         testAddition(Instant.parse('2021-03-28T03:45+02:00'), Duration.ofMinutes(15));
         testAddition(Instant.parse('2021-03-28T03:45+03:00'), Duration.ofMinutes(15));
         testAddition(Instant.parse('2021-03-28T03:45+04:00'), Duration.ofMinutes(15));
+    })
+    it('adds duration at time transition', () => {
+        const zonedDateTime = LocalDateTime.of(
+            new LocalDate(2021, 5, 16),
+            new LocalTime(11, 0)
+        ).atZone(ZoneId.of('UTC'));
+        assert.equal(zonedDateTime.toString(), '2021-05-16T11:00:00.000+00:00');
+        const sameInstantOtherZone = zonedDateTime.toInstant().atZone(ZoneId.of('Europe/Amsterdam'))
+        assert.equal(sameInstantOtherZone.toString(), '2021-05-16T13:00:00.000+02:00');
     })
 });
 
