@@ -76,7 +76,7 @@ We'd like to make it optional to use the moment-timezone library. To make a sepa
 # Feedback
 
 If something is missing from this library that makes it not fit your use case today, or if you find a bug that spoils
-it for you, don't hesitate to create an Issue or a Pull Request. Feedback and contributions are sincerely appreciated.
+it for you, don't hesitate to create an Issue or a Pull Request. Or just a PM! At this moment, the library is not at 1.0 yet and is organically growing to suit the use cases we run into first! Any feedback and/or contribution are sincerely appreciated.
 
 
 # License
