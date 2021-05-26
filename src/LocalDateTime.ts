@@ -27,6 +27,12 @@ export class LocalDateTime
 		return new LocalDateTime(date, time);
 	}
 
+	public static browser()
+	{
+		return Instant.now()
+			.atZone(ZoneId.browser());
+	}
+
 	public atZone(zoneIdString: ZoneIdString)
 	public atZone(zoneId: ZoneId)
 	public atZone(arg: ZoneId | ZoneIdString)
