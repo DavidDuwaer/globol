@@ -28,7 +28,7 @@ Example:
 ```javascript
 const currentTimeInNewYork = LocalDateTime
     .now()
-    .atZone(ZoneId.of('America/New_York')) // returns a ZonedDateTime
+    .atZone('America/New_York') // returns a ZonedDateTime
     .toLocalTime(); // returns a LocalTime
 ```
 
@@ -48,7 +48,7 @@ Instant.now() // returns an Instant
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
 Instant.now()
-    .atZone(ZoneId.of('Europe/Berlin')) // returns a ZonedDateTime
+    .atZone('Europe/Berlin') // returns a ZonedDateTime
     .toLocalTime() // returns a LocalTime
 ```
 
