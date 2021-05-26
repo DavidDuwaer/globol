@@ -1,8 +1,9 @@
 import {ZonedDateTime} from './ZonedDateTime';
 import {Duration} from "./Duration";
-import {ZoneId} from "./ZoneId";
+import {ZoneId, ZoneIdString} from "./ZoneId";
 import {requireValidDate} from "./util/requireValidDate";
 import {requireInt} from "./util/requireInt";
+import {toZoneId} from "./util/toZoneId";
 
 export class Instant
 {
@@ -59,9 +60,11 @@ export class Instant
 		return new Instant(this.epochMilli + duration.asMillis);
 	}
 
+	public atZone(zoneIdString: ZoneIdString)
 	public atZone(zoneId: ZoneId)
+	public atZone(arg: ZoneId | ZoneIdString)
 	{
-		return new ZonedDateTime(this.toJS(), zoneId);
+		return new ZonedDateTime(this.toJS(), toZoneId(arg));
 	}
 
 	public isAfter(otherInstant: Instant): boolean

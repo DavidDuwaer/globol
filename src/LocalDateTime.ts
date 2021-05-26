@@ -2,13 +2,14 @@ import moment from 'moment-timezone';
 import {Instant} from './Instant';
 import {LocalDate} from './LocalDate';
 import {LocalTime} from './LocalTime';
-import {ZoneId} from './ZoneId';
+import {ZoneId, ZoneIdString} from './ZoneId';
 import {ZonedDateTime} from "./ZonedDateTime";
 import {DayOfWeek} from "./DayOfWeek";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
 import {newValidMoment} from "./util/newValidMoment";
 import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
 import {requireValidMoment} from "./util/requireValidMoment";
+import {toZoneId} from "./util/toZoneId";
 
 export class LocalDateTime
 {
@@ -26,8 +27,11 @@ export class LocalDateTime
 		return new LocalDateTime(date, time);
 	}
 
-	public atZone(zoneId: ZoneId): ZonedDateTime
+	public atZone(zoneIdString: ZoneIdString)
+	public atZone(zoneId: ZoneId)
+	public atZone(arg: ZoneId | ZoneIdString)
 	{
+		const zoneId = toZoneId(arg);
 		const zonedMoment = this.toZonedMoment(zoneId);
 		return new ZonedDateTime(zonedMoment.toDate(), zoneId);
 	}
