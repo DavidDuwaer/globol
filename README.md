@@ -26,9 +26,10 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 Example:
 
 ```javascript
-const timeInNewYork = Instant.now()                      // returns a global timestamp; an Instant
-                             .atZone('America/New_York') // returns that time expressed in a certain time zone; a ZonedDateTime
-                             .toLocalTime();             // returns a time on the clock, e.g. "14:00"; a LocalTime
+const timeInNewYork = Instant
+    .now()                      // returns a global timestamp; an Instant
+    .atZone('America/New_York') // returns that time expressed in a certain time zone; a ZonedDateTime
+    .toLocalTime();             // returns a time on the clock, e.g. "14:00"; a LocalTime
 ```
 
 
