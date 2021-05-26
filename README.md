@@ -27,8 +27,8 @@ Example:
 
 ```javascript
 const currentTimeInNewYork = Instant.now() // returns an Instant, a global timestamp
-    .atZone('America/New_York') // returns that time expressed in a certain time zone, a ZonedDateTime
-    .toLocalTime(); // returns a time on the clock, e.g. "14:00", a LocalTime
+    .atZone('America/New_York')            // returns that time expressed in a certain time zone, a ZonedDateTime
+    .toLocalTime();                        // returns a time on the clock, e.g. "14:00", a LocalTime
 ```
 
 
