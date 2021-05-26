@@ -67,14 +67,84 @@ export class Instant
 		return new ZonedDateTime(this.toJS(), toZoneId(arg));
 	}
 
+	public plus(duration: Duration): Instant
+	{
+		return Instant.ofEpochMilli(this.epochMilli + duration.asMillis);
+	}
+
+	public plusSeconds(secondsToAdd: number)
+	{
+		return this.plus(Duration.ofSeconds(
+			requireInt(
+				secondsToAdd,
+				`You must supply a whole number of seconds, got ${secondsToAdd}.`
+			)
+		))
+	}
+
+	public plusMillis(secondsToAdd: number)
+	{
+		return this.plus(Duration.ofMilliseconds(
+			requireInt(
+				secondsToAdd,
+				`You must supply a whole number of seconds, got ${secondsToAdd}.`
+			)
+		))
+	}
+
+	public minus(duration: Duration): Instant
+	{
+		return Instant.ofEpochMilli(this.epochMilli - duration.asMillis);
+	}
+
+	public minusSeconds(secondsToAdd: number)
+	{
+		return this.minus(Duration.ofSeconds(
+			requireInt(
+				secondsToAdd,
+				`You must supply a whole number of seconds, got ${secondsToAdd}.`
+			)
+		))
+	}
+
+	public minusMillis(secondsToAdd: number)
+	{
+		return this.minus(Duration.ofMilliseconds(
+			requireInt(
+				secondsToAdd,
+				`You must supply a whole number of seconds, got ${secondsToAdd}.`
+			)
+		))
+	}
+
+	/**
+	 * Will return a positive integer if this {@link Instant} is after the {@link Instant}
+	 * given as argument, negative if before, and 0 if both {@link Instant}s are at exactly the same time
+	 * (millisecond precision);
+	 */
+	public compareTo(otherInstant: Instant): number
+	{
+		return this.epochMilli - otherInstant.epochMilli;
+	}
+
 	public isAfter(otherInstant: Instant): boolean
 	{
-		return this.epochMilli > otherInstant.epochMilli;
+		return this.compareTo(otherInstant) > 0;
 	}
 
 	public isBefore(otherInstant: Instant): boolean
 	{
-		return this.epochMilli < otherInstant.epochMilli;
+		return this.compareTo(otherInstant) < 0;
+	}
+
+	/**
+	 * Returns true if this {@link Instant} occurs at the same time as the {@link Instant} supplied as argument.
+	 */
+	public equals(otherInstant: Instant): boolean
+	{
+		if (this === otherInstant)
+			return true;
+		return this.epochMilli === otherInstant.epochMilli;
 	}
 
 	/**
