@@ -60,9 +60,9 @@ export class Instant
 		return new Instant(this.epochMilli + duration.asMillis);
 	}
 
-	public atZone(zoneIdString: ZoneIdString)
-	public atZone(zoneId: ZoneId)
-	public atZone(arg: ZoneId | ZoneIdString)
+	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
+	public atZone(zoneId: ZoneId): ZonedDateTime
+	public atZone(arg: ZoneId | ZoneIdString): ZonedDateTime
 	{
 		return new ZonedDateTime(this.toJS(), toZoneId(arg));
 	}

@@ -33,9 +33,9 @@ export class LocalDateTime
 			.atZone(ZoneId.browser());
 	}
 
-	public atZone(zoneIdString: ZoneIdString)
-	public atZone(zoneId: ZoneId)
-	public atZone(arg: ZoneId | ZoneIdString)
+	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
+	public atZone(zoneId: ZoneId): ZonedDateTime
+	public atZone(arg: ZoneId | ZoneIdString): ZonedDateTime
 	{
 		const zoneId = toZoneId(arg);
 		const zonedMoment = this.toZonedMoment(zoneId);
