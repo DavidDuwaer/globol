@@ -1,4 +1,5 @@
 import moment, {Duration as MomentDuration} from 'moment';
+import {Instant} from "./Instant";
 
 export class Duration
 {
@@ -50,6 +51,13 @@ export class Duration
     public static ofMilliseconds(milliseconds: number)
     {
         return Duration.parse(`PT${milliseconds/1000}S`);
+    }
+
+    public static between(fromExcl: Instant, toIncl: Instant)
+    {
+        return Duration.ofMilliseconds(
+            toIncl.toEpochMilli() - fromExcl.toEpochMilli()
+        );
     }
 
     /**
