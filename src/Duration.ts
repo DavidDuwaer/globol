@@ -60,6 +60,11 @@ export class Duration
         );
     }
 
+    public static get ZERO()
+    {
+        return Duration.ofMilliseconds(0);
+    }
+
     /**
      * This {@link Duration} expressed in number of days, rounded down. In other words: the
      * total number of whole days that fit in this {@link Duration}. Not to be confused with
