@@ -71,7 +71,8 @@ A fixed length of physical time.
 These represent timezones. The difference between ZoneId and ZoneOffset is as follows: ZoneId represents something like `Europe/Amsterdam`, which can have a `ZoneOffset` of +1 in the winter and +2 in the summer.
 
 # Future work
-We'd like to make it optional to use the moment-timezone library. To make a separate library `globol-timezone` that has `globol` as an `npm` peer dependency, which, when included, runtime-enriches Globol with the `moment-timezone` time zone information.
+## Time zone information
+Browsers provide time zone information, but the support is still limited/incomplete. Therefore we'd like to make it optional to include the moment-timezone dependency. This can be done by make a separate NPM dependency called `globol-timezone` which, when included, runtime-enriches Globol with the `moment-timezone` time zone information. When it's left out globol would rely on the time zone information supplied by the browser.
 
 # Feedback
 
