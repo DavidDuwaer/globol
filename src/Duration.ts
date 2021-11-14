@@ -10,6 +10,10 @@ export class Duration
         this.momentDuration = momentDuration;
     }
 
+    /**
+     * Accepts an ISO-8601 duration string, e.g. "PT15M" for "fifteen minutes", and turns it into
+     * an appropriate {@link Duration}.
+     */
     public static parse(durationString: string)
     {
         return new Duration(moment.duration(durationString));
