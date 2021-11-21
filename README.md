@@ -50,11 +50,16 @@ Get the current timestamp
 Instant.now() // returns an Instant
 ```
 
+There is a shorthand for this one
+```typescript
+now() // returns an Instant
+```
+
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
-Instant.now()
-    .atZone('Europe/Berlin') // returns a ZonedDateTime
-    .toLocalTime() // returns a LocalTime
+now() // a timestamp
+    .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
+    .toLocalTime() // returns a LocalTime, e.g. '14:57'
 ```
 
 # Core concepts
