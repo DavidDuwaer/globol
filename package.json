@@ -1,6 +1,6 @@
 {
   "name": "globol",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy.",
   "keywords": [
     "time",
@@ -35,7 +35,7 @@
     "pretest": "npm build",
     "build-dev": "npm run clear && tsc --sourceMap",
     "test": "npm run build-dev && mocha -r ts-node/register tests/**/*.test.ts",
-    "dist": "npm install && npm run test && npm publish"
+    "prepublishOnly": "npm install && npm run build && npm run test"
   },
   "dependencies": {
     "moment": "^2.29.1",
