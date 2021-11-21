@@ -54,14 +54,16 @@ export class DayOfWeek
 
     public plus(nrOfDays: number)
     {
-        const newISOWeekDayNumber = ((this.isoNumber + nrOfDays - 1) % 7) + 1 as IsoWeekDayNumber;
+        const multiplesOfSevenDaysToAddToKeepNrOfDaysPositive = nrOfDays < 0
+            ? Math.ceil(Math.abs(nrOfDays) / 7) * 7 + 7
+            : 0;
+        const newISOWeekDayNumber = ((this.isoNumber - 1 + nrOfDays + multiplesOfSevenDaysToAddToKeepNrOfDaysPositive) % 7) + 1 as IsoWeekDayNumber;
         return getDayOfWeek(newISOWeekDayNumber);
     }
 
     public minus(nrOfDays: number)
     {
-        const newISOWeekDayNumber = ((this.isoNumber - nrOfDays - 1) % 7) + 1 as IsoWeekDayNumber;
-        return getDayOfWeek(newISOWeekDayNumber);
+        return this.plus(-nrOfDays);
     }
 
     /**
