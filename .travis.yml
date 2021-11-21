@@ -5,3 +5,4 @@ before_install:
 - npm install -g typescript@1.0
 script:
 - npm test
+after_success: npm run coverage

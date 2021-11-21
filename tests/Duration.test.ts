@@ -1,6 +1,6 @@
 import {Duration} from "../dist";
 import {assert} from "chai";
-import {describe} from "mocha";
+import {} from "mocha";
 
 describe('Duration', () => {
     describe('.of factory method', () => {

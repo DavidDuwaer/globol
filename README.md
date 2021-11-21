@@ -11,7 +11,9 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
   <a href="https://travis-ci.org/github/Artiry/globol">
   <img src="https://travis-ci.org/Artiry/globol.svg?branch=master"/>
  </a>
+<a href='https://coveralls.io/github/Artiry/globol?branch=master'><img src='https://coveralls.io/repos/github/Artiry/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
  </p>
+
 
 * Dates, times, time zones, durations, week days...
 * Based on ideas taken from the amazing Java `java.time` library.

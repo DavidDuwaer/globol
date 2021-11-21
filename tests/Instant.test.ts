@@ -1,7 +1,7 @@
 import {Duration, Instant, now} from "../dist";
 import {assert} from "chai";
 import {LocalDate, LocalDateTime, LocalTime, ZoneId} from "../src";
-import {describe} from "mocha";
+import {} from "mocha";
 import {DurationSpec} from "../src/DurationSpec";
 
 describe('instant', () => {
