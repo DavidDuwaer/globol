@@ -1,5 +1,7 @@
 import moment, {Duration as MomentDuration} from 'moment';
 import {Instant} from "./Instant";
+import {DurationSpec} from "./DurationSpec";
+import {requireInt} from "./util/requireInt";
 
 export class Duration
 {
@@ -25,6 +27,36 @@ export class Duration
     public toString()
     {
         return this.momentDuration.toISOString();
+    }
+
+    public static of(
+        {
+            years = 0,
+            days = 0,
+            hours = 0,
+            minutes = 0,
+            seconds = 0,
+            millis = 0,
+        }: DurationSpec
+    )
+    {
+        requireInt(
+            seconds * 1000,
+            `Not accepting values with precision <1/1000ths of seconds; got ${seconds}`
+        );
+        requireInt(
+            millis,
+            `Only accepting whole milliseconds; got ${millis}`
+        );
+        return Duration.parse(
+            `P`
+            + `${years}Y`
+            + `${days}D`
+            + 'T'
+            + `${hours}H`
+            + `${minutes}M`
+            + `${seconds + (millis / 1000)}S`
+        );
     }
 
     public static ofYears(years: number)

@@ -4,44 +4,51 @@ import {ZoneId, ZoneIdString} from "./ZoneId";
 import {requireValidDate} from "./util/requireValidDate";
 import {requireInt} from "./util/requireInt";
 import {toZoneId} from "./util/toZoneId";
+import {DurationSpec} from "./DurationSpec";
 
 export class Instant
 {
-	private readonly epochMilli: number;
+	public static readonly EPOCH = new Instant(0, 0);
+	private readonly secondsSinceEpoch: number;
+	private readonly microsInSecond: number;
 
-	private constructor(epochMilli: number)
+	private constructor(secondsSinceEpoch: number, microsInSecond: number)
 	{
-		this.epochMilli = requireInt(epochMilli);
+		this.secondsSinceEpoch = requireInt(
+			secondsSinceEpoch,
+			`Only a whole number allowed for the number of seconds since the epoch; got ${secondsSinceEpoch}`
+		);
+		this.microsInSecond = requireInt(
+			microsInSecond,
+			`Only a whole number allowed for the number of microseconds in the current second; got ${microsInSecond}`
+		);
 	}
 
 	public static now()
 	{
-		return new Instant(new Date().getTime());
+		return Instant.ofEpochMilli(Date.now());
 	}
 
 	public static parse(stringValue: string)
 	{
-		const date = new Date(stringValue);
-		return new Instant(
-			requireValidDate(date).getTime()
+		const date = requireValidDate(
+			new Date(stringValue)
 		);
+		return Instant.ofEpochMilli(date.getTime());
 	}
 
 	public static from(date: Date)
 	{
-		return new Instant(
+		return Instant.ofEpochMilli(
 			requireValidDate(date).getTime()
 		);
 	}
 
 	public static ofEpochMilli(epochMilli: number)
 	{
-		return new Instant(
-			requireInt(
-				epochMilli,
-				`Expected valid integer for epochMilli, but got ${epochMilli}`
-			)
-		);
+		const secondsSinceEpoch = Math.floor(epochMilli / 1000);
+		const microsInSecond = (epochMilli % 1000) * 1000;
+		return new Instant(secondsSinceEpoch, microsInSecond);
 	}
 
 	public static ofEpochSecond(epochSecond: number)
@@ -51,13 +58,19 @@ export class Instant
 			`Expected valid integer for epoch second, but got ${epochSecond}`
 		);
 		return new Instant(
-			validEpochSecond * 1000
+			validEpochSecond,
+			0,
 		);
 	}
 
+	/**
+	 * Alias for {@link .plus}
+	 */
+	public add(duration: DurationSpec): Instant
 	public add(duration: Duration): Instant
+	public add(duration: Duration | DurationSpec): Instant
 	{
-		return new Instant(this.epochMilli + duration.asMillis);
+		return this.plus(duration);
 	}
 
 	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
@@ -67,9 +80,14 @@ export class Instant
 		return new ZonedDateTime(this.toJS(), toZoneId(arg));
 	}
 
+	public plus(duration: DurationSpec): Instant
 	public plus(duration: Duration): Instant
+	public plus(duration: Duration | DurationSpec): Instant
 	{
-		return Instant.ofEpochMilli(this.epochMilli + duration.asMillis);
+		const asDuration = duration instanceof Duration
+			? duration
+			: Duration.of(duration);
+		return Instant.ofEpochMilli(this.toEpochMilli() + asDuration.asMillis);
 	}
 
 	public plusSeconds(secondsToAdd: number)
@@ -92,9 +110,24 @@ export class Instant
 		))
 	}
 
-	public minus(duration: Duration): Instant
+	/**
+	 * Alias for {@link .minus}
+	 */
+	public subtract(duration: DurationSpec): Instant
+	public subtract(duration: Duration): Instant
+	public subtract(duration: Duration | DurationSpec): Instant
 	{
-		return Instant.ofEpochMilli(this.epochMilli - duration.asMillis);
+		return this.minus(duration);
+	}
+
+	public minus(duration: DurationSpec): Instant
+	public minus(duration: Duration): Instant
+	public minus(duration: Duration | DurationSpec): Instant
+	{
+		const asDuration = duration instanceof Duration
+			? duration
+			: Duration.of(duration);
+		return Instant.ofEpochMilli(this.toEpochMilli() - asDuration.asMillis);
 	}
 
 	public minusSeconds(secondsToAdd: number)
@@ -124,7 +157,7 @@ export class Instant
 	 */
 	public compareTo(otherInstant: Instant): number
 	{
-		return this.epochMilli - otherInstant.epochMilli;
+		return this.toEpochMicro() - otherInstant.toEpochMicro();
 	}
 
 	public isAfter(otherInstant: Instant): boolean
@@ -144,15 +177,26 @@ export class Instant
 	{
 		if (this === otherInstant)
 			return true;
-		return this.epochMilli === otherInstant.epochMilli;
+		return this.secondsSinceEpoch === otherInstant.secondsSinceEpoch
+			&& this.microsInSecond === otherInstant.microsInSecond;
 	}
 
 	/**
-	 * Gets the number of milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
+	 * Gets the number of milliseconds from the Java epoch of 1970-01-01T00:00:00Z. Microseconds, if present, are
+	 * rounded down, so this method returns an integer.
 	 */
 	public toEpochMilli(): number
 	{
-		return this.epochMilli;
+		return this.toEpochMicro() / 1000;
+	}
+
+	/**
+	 * In most cases simply a thousandfold of {@link .toEpochMilli()}, this may return a different value than 1000times
+	 * {@link .toEpochMilli()} if this {@link Instant} was instantiated with a timestamp with sub-millisecond precision.
+	 */
+	public toEpochMicro(): number
+	{
+		return this.secondsSinceEpoch * 1000_000 + this.microsInSecond;
 	}
 
 	/**
@@ -169,13 +213,13 @@ export class Instant
 	 */
 	public getEpochSecond(): number
 	{
-		return Math.floor(this.epochMilli / 1000);
+		return this.secondsSinceEpoch;
 	}
 
 	public toJS(): Date
 	{
 		return requireValidDate(
-			new Date(this.epochMilli)
+			new Date(this.toEpochMilli())
 		);
 	}
 }

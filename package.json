@@ -32,6 +32,7 @@
   "scripts": {
     "clear": "rimraf dist",
     "build": "npm run clear && tsc",
+    "pretest": "npm build",
     "build-dev": "npm run clear && tsc --sourceMap",
     "test": "npm run build-dev && mocha -r ts-node/register tests/**/*.test.ts",
     "dist": "npm install && npm run test && npm publish"
