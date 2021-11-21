@@ -16,7 +16,7 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 
 * Dates, times, timestamps, time zones, durations.
 * Conversion between them and calculations with them.
-* **Type safe**. An API that *works*. No more comparing apples and oranges when it comes to dates. You want to express an instant in time, a date on a calendar, a time on the clock? With or without a timezone, or maybe a zone offset? No longer are these concepts all thrown into one object or no object at all. Clearly de-obfuscated, dates become intuitive.
+* **Type safe**. An API that *works*. No more comparing apples and oranges when it comes to dates. You want to express an instant in time, a date on a calendar, a time on the clock? When zones come into play, they are not interchangeable. No longer are these concepts all thrown into one date type. Clearly de-obfuscated, dates & time become intuitive.
 * **Immutable**.
 * **Fail early**. No more `NaN`s slipping into your date objects. Globol checks its input, and throws Errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
@@ -41,6 +41,9 @@ const timeInNewYork = Instant
 npm install globol
 ```
 
+# How to use
+Globol revolves around its data types, of which `Instant`, `LocalDateTime`, `LocalDate`, `LocalTime` and `Duration` are the most important. You can create instances of any one of them with static methods from their classes. For instance, you can create an instance with `Instant.from(<js date>)` or `Instant.parse(<a formatted date string>)`. Similar methods exist on all Globol data types. Once a data type is instantiated, you can perform calculations and conversions with the methods on them.
+
 # Usage examples
 Get the current timestamp
 ```typescript
@@ -58,15 +61,15 @@ Instant.now()
 This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them. The following are the most important datatypes, the ones that you should know of.
 
 ### Instant
-This is a moment in physical time. This is the thing you will likely use most often.
-### LocalDateTime
-A date with a time, e.g. `2020-01-20T19:34`
-### LocalDate
-A date, e.g. `2020-01-20`
-### LocalTime
-A time, e.g. `08:34:00.000`
+This is a moment in time, a timestamp. Is equivalent to a number of (milli)seconds since the epoch.
 ### ZonedDateTime
-A datetime with a zone offset, e.g. `2020-01-20T19:34Z+01`. Because it has an offset, it points to an unambiguous point in physical time, like Instant. Unlike `Instant`, however, this object cares about how the datetime is *represented*. For example: there can be a `ZonedDateTime` `2020-01-20T19:00Z+01` and a `ZonedDateTime` `2020-01-20T18:00Z+00`. They both correspond to the same moment in physical time, i.e. the same `Instant`, but they are two distinct `ZonedDateTimes`.
+A date with a time and a time zone offset, e.g. `2020-01-20T19:34Z+01`. A `ZonedDateTime` implies one `Instant`, but one `Instant` can be represented in at least 24 ZonedDateTimes (one for each time zone).
+### LocalDateTime
+A date and a time together, but without a zone, e.g. `2020-01-20T19:34`
+### LocalDate
+A date without a time, e.g. `2020-01-20`
+### LocalTime
+A time without a date, e.g. one LocalTime can mean `18:34` or `6:34 PM`, depending on how you format it in string form.
 ### Duration
 A fixed length of physical time.
 ### ZoneId & ZoneOffset
