@@ -179,3 +179,5 @@ export class Instant
 		);
 	}
 }
+
+export const now = Instant.now;

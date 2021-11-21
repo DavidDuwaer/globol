@@ -1,9 +1,7 @@
-import {Duration, Instant} from "../dist";
+import {Duration, Instant, now} from "../dist";
 import {assert} from "chai";
-import {LocalDate, LocalDateTime, LocalTime, ZonedDateTime, ZoneId} from "../src";
-
-describe('that tests run', () => {
-});
+import {LocalDate, LocalDateTime, LocalTime, ZoneId} from "../src";
+import {describe} from "mocha";
 
 describe('instant', () => {
     it('adds duration at time transition', () => {
@@ -36,6 +34,16 @@ describe('instant', () => {
         assert.equal(zonedDateTime.toString(), '2021-05-16T11:00:00.000+00:00');
         const sameInstantOtherZone = zonedDateTime.toInstant().atZone(ZoneId.of('Europe/Amsterdam'))
         assert.equal(sameInstantOtherZone.toString(), '2021-05-16T13:00:00.000+02:00');
+    })
+});
+
+describe('now() function', () => {
+    it('returns the current time', () => {
+        const before = Date.now();
+        const sample = now();
+        const after = Date.now();
+        assert.isTrue(before <= sample.toEpochMilli());
+        assert.isTrue(after >= sample.toEpochMilli());
     })
 });
 
