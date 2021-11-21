@@ -47,19 +47,19 @@ Globol revolves around its data types, of which `Instant`, `LocalDateTime`, `Loc
 # Usage examples
 Get the current timestamp
 ```typescript
-Instant.now() // returns an Instant
+Instant.now()                // returns an Instant
 ```
 
-There is a shorthand for this one
+Or use the shorthand
 ```typescript
-now() // returns an Instant
+now()                        // returns an Instant
 ```
 
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
-now() // a timestamp
+now()                        // a timestamp
     .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
-    .toLocalTime() // returns a LocalTime, e.g. '14:57'
+    .toLocalTime()           // returns a LocalTime, e.g. '14:57'
 ```
 
 # Core concepts
