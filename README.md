@@ -19,7 +19,8 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 * **Type safe**. An API that *works*. No more comparing apples and oranges when it comes to dates. You want to express an instant in time, a date on a calendar, a time on the clock? With or without a timezone, or maybe a zone offset? No longer are these concepts all thrown into one object or no object at all. Clearly de-obfuscated, dates become intuitive.
 * **Immutable**.
 * **Fail early**. No more `NaN`s slipping into your date objects. Globol checks its input, and throws Errors with helpful messages if there's something wrong.
-* **Fluent**. No searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation.
+* **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
+* **In-place documentation**. Extensive jsdoc on methods lets you help yourself without leaving your IDE.
 * ISO-8601-compliant serilization/deserialization of all data representations.
 * Under the hood, currently uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 * **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
