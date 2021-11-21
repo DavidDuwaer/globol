@@ -41,7 +41,7 @@ npm install globol
 ```
 
 # How to use
-Globol revolves around its data types, of which `Instant`, `LocalDateTime`, `LocalDate`, `LocalTime` and `Duration` are the most important. You can create instances of any one of them with static methods from their classes. For instance, you can create an instance with `Instant.from(<js date>)` or `Instant.parse(<a formatted date string>)`. Similar methods exist on all Globol data types. Once a data type is instantiated, you can perform calculations and conversions with the methods on them.
+Globol revolves around a few smart data types, of which `Instant`, `LocalDateTime`, `LocalDate`, `LocalTime` and `Duration` are the most important. You can create instances of any one of them with static methods from their classes. For instance, you can create an instance with `Instant.from(<js date>)` or `Instant.parse(<a formatted date string>)`. Similar methods exist on all Globol data types. Once a data type is instantiated, you can perform calculations and conversions with the methods on them.
 
 # Usage examples
 Get the current timestamp
