@@ -36,11 +36,14 @@ export class LocalDate
 
 	public static parse(string: string)
 	{
-		const segments = string.split('-');
+		const match = /(?<year>-?[0-9]{1,4})-(?<month>[0-9]{1,2})-(?<dayOfMonth>[0-9]{1,2})/
+			.exec(string)
+		if (match === null)
+			throw new Error(`Could not parse '${string}' as a LocalDate`);
 		return new LocalDate(
-			parseInt(segments[0]),
-			parseInt(segments[1]) as MonthNumber,
-			parseInt(segments[2]) as DayOfMonthNumber
+			requireInt(parseFloat(match.groups!['year']!)),
+			requireInt(parseFloat(match.groups!['month']!)) as MonthNumber,
+			requireInt(parseFloat(match.groups!['dayOfMonth']!)) as DayOfMonthNumber
 		);
 	}
 
