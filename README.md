@@ -21,7 +21,7 @@
 * **Immutable**.
 * **Fail early**. No more `NaN`'s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
-* **In-place documentation**. Help yourself without leaving your IDE with extensive JSDoc on all methods and functions.
+* **In-place documentation**. Help yourself without leaving your IDE, with extensive JSDoc on all methods and functions.
 * ISO-8601-compliant serilization/deserialization of all data representations.
 * Under the hood, currently uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 * **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
