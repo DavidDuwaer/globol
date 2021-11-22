@@ -3,7 +3,7 @@
  </p>
 <p align="center">
  Date & time library built for Typescript <i>first</i>.<br>
- Optimized for speed of use and minimization of bugs.
+ Optimized for ease of use, speed of use and minimization of bugs.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
