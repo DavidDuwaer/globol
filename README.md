@@ -19,7 +19,7 @@
 * Conversion between them and calculations with them.
 * **Type safe**. An API that *works*. No comparing apples and oranges. You want to express an instant in time, a date on a calendar, a time on the clock? When zones come into play, they are not interchangeable. No longer are these concepts all thrown into one date type. Clearly de-obfuscated, dates & time become intuitive.
 * **Immutable**.
-* **Fail early**. No more `NaN`s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
+* **Fail early**. No more `NaN`'s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
 * **In-place documentation**. Extensive jsdoc on methods lets you help yourself without leaving your IDE.
 * ISO-8601-compliant serilization/deserialization of all data representations.
