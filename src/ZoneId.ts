@@ -25,11 +25,10 @@ export class ZoneId
 		return new ZoneId(zoneId);
 	}
 
-	public static equal(...zoneIds: ZoneId[])
+	public static equal(zoneId1: ZoneId, zoneId2: ZoneId, ...otherZoneIds: ZoneId[])
 	{
-		return zoneIds.length > 1
-			? zoneIds.every(element => element.equals(zoneIds[0]))
-			: true;
+		const tail = [zoneId2, ...otherZoneIds];
+		return tail.every(element => element.equals(zoneId1));
 	}
 
 	public equals(zoneId: ZoneId | null | undefined)
