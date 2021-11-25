@@ -2,6 +2,8 @@ import {requireValidHourNumber} from "./util/requireValidHourNumber";
 import {requireValidMinuteNumber} from "./util/requireValidMinuteNumber";
 import {requireValidSecondNumber} from "./util/requireValidSecondNumber";
 import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber";
+import {LocalDateTime} from "./LocalDateTime";
+import {LocalDate} from "./LocalDate";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -65,6 +67,14 @@ export class LocalTime
 			parseInt(segments[1]) as MinuteNumber,
 			secondAndMillis !== undefined && secondAndMillis[0] !== undefined ? parseInt(secondAndMillis[0]) : undefined,
 			secondAndMillis !== undefined && secondAndMillis[1] !== undefined ? parseInt(secondAndMillis[1]) : undefined
+		);
+	}
+
+	public atDate(date: LocalDate): LocalDateTime
+	{
+		return LocalDateTime.of(
+			date,
+			this
 		);
 	}
 
