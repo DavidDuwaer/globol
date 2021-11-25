@@ -25,6 +25,18 @@ export class ZoneId
 		return new ZoneId(zoneId);
 	}
 
+	public static equal(...zoneIds: ZoneId[])
+	{
+		return zoneIds.length > 1
+			? zoneIds.every(element => element.equals(zoneIds[0]))
+			: true;
+	}
+
+	public equals(zoneId: ZoneId | null | undefined)
+	{
+		return this.zoneId === zoneId?.zoneId;
+	}
+
 	public toString()
 	{
 		return this.zoneId;
