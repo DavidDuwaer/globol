@@ -93,12 +93,12 @@ export class LocalTime
 		return value;
 	}
 
-	public equals(localTime: LocalTime)
+	public equals(localTime: LocalTime | null | undefined)
 	{
-		return this.hour === localTime.hour
-			&& this.minute === localTime.minute
-			&& this.second === localTime.second
-			&& this.millisecond === localTime.millisecond;
+		return this.hour === localTime?.hour
+			&& this.minute === localTime?.minute
+			&& this.second === localTime?.second
+			&& this.millisecond === localTime?.millisecond;
 	}
 
 	public isBefore(other: LocalTime)

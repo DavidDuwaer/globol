@@ -173,12 +173,12 @@ export class Instant
 	/**
 	 * Returns true if this {@link Instant} occurs at the same time as the {@link Instant} supplied as argument.
 	 */
-	public equals(otherInstant: Instant): boolean
+	public equals(otherInstant: Instant | null | undefined): boolean
 	{
 		if (this === otherInstant)
 			return true;
-		return this.secondsSinceEpoch === otherInstant.secondsSinceEpoch
-			&& this.microsInSecond === otherInstant.microsInSecond;
+		return this.secondsSinceEpoch === otherInstant?.secondsSinceEpoch
+			&& this.microsInSecond === otherInstant?.microsInSecond;
 	}
 
 	/**

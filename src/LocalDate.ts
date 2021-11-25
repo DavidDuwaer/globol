@@ -92,11 +92,11 @@ export class LocalDate
 			.format('YYYY-MM-DD');
 	}
 
-	public equals(localDate: LocalDate): boolean
+	public equals(localDate: LocalDate | null | undefined): boolean
 	{
-		return this.year === localDate.year
-			&& this.month === localDate.month
-			&& this.dayOfMonth === localDate.dayOfMonth;
+		return this.year === localDate?.year
+			&& this.month === localDate?.month
+			&& this.dayOfMonth === localDate?.dayOfMonth;
 	}
 
 	public isBefore(other: LocalDate): boolean
