@@ -25,10 +25,16 @@ export class ZoneId
 		return new ZoneId(zoneId);
 	}
 
-	public static equal(zoneId1: ZoneId, zoneId2: ZoneId, ...otherZoneIds: ZoneId[])
+	public static equal(
+		zoneId1: ZoneId | null | undefined,
+		zoneId2: ZoneId | null | undefined,
+		...otherDaysOfWeek: (ZoneId | null | undefined)[]
+	)
 	{
-		const tail = [zoneId2, ...otherZoneIds];
-		return tail.every(element => element.equals(zoneId1));
+		const tail = [zoneId2, ...otherDaysOfWeek];
+		return zoneId1 === null || zoneId1 === undefined
+			? tail.every(element => element === zoneId1)
+			: tail.every(element => element?.equals(zoneId1));
 	}
 
 	public equals(zoneId: ZoneId | null | undefined)

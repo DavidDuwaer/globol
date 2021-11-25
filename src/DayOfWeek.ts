@@ -52,6 +52,23 @@ export class DayOfWeek
         }
     }
 
+    public static equal(
+        dayOfWeek1: DayOfWeek | null | undefined,
+        dayOfWeek2: DayOfWeek | null | undefined,
+        ...otherDaysOfWeek: (DayOfWeek | null | undefined)[]
+    )
+    {
+        const tail = [dayOfWeek2, ...otherDaysOfWeek];
+        return dayOfWeek1 === null || dayOfWeek1 === undefined
+            ? tail.every(element => element === dayOfWeek1)
+            : tail.every(element => element?.equals(dayOfWeek1));
+    }
+
+    public equals(dayOfWeek: DayOfWeek | null | undefined)
+    {
+        return this.isoNumber === dayOfWeek?.isoNumber;
+    }
+
     public plus(nrOfDays: number)
     {
         const multiplesOfSevenDaysToAddToKeepNrOfDaysPositive = nrOfDays < 0
