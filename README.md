@@ -2,7 +2,8 @@
 <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
  </p>
 <p align="center">
-Date & time library for Javascript/Typescript<br>Made with the user (that's you! the programmer!) in mind.
+ Date & time library built for Typescript <i>first</i>.<br>
+ Optimized for ease of use, speed of use and minimization of bugs.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
@@ -14,13 +15,13 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 <a href='https://coveralls.io/github/Artiry/globol?branch=master'><img src='https://coveralls.io/repos/github/Artiry/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
  </p>
 
-
-* Dates, times, time zones, durations, week days...
-* Based on ideas taken from the amazing Java `java.time` library.
-* **Type safe**. No more comparing apples and oranges when it comes to dates. You want to express a moment in time, a date on the calendar, a time on the clock? With or without a timezone, or maybe a zone offset? No longer are these concepts all thrown into one object, or worse, no object at all.
-* **Immutable**. The 00s are long gone, but still gets a mention.
-* **Fail early**. Arithmetics with dates can get complex enough. To reduce complexity, you need to know that your date objects are what you think they are. So Globol checks its input, and throws Errors with helpful messages if there's something wrong.
-* **Fluent**. No searching the web for which functions suit your needs, but intuitive use with auto-complete and in-place method/class/function documentation.
+* Dates, times, timestamps, time zones, durations.
+* Conversion between them and calculations with them.
+* **Type safe**. An API that *works*. No comparing apples and oranges. You want to express an instant in time, a date on a calendar, a time on the clock? When zones come into play, they are not interchangeable. No longer are these concepts all thrown into one date type. Clearly de-obfuscated, dates & time become intuitive.
+* **Immutable**.
+* **Fail early**. No more `NaN`'s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
+* **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
+* **In-place documentation**. Help yourself without leaving your IDE, with extensive JSDoc on all methods and functions.
 * ISO-8601-compliant serilization/deserialization of all data representations.
 * Under the hood, currently uses the **well-tested**, **well-trusted** `moment.js` internally for parsing, formatting and time zone conversions.
 * **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
@@ -28,10 +29,9 @@ Date & time library for Javascript/Typescript<br>Made with the user (that's you!
 Example:
 
 ```javascript
-const timeInNewYork = Instant
-    .now()                      // returns a global timestamp; an Instant
-    .atZone('America/New_York') // returns that time expressed in a certain time zone; a ZonedDateTime
-    .toLocalTime();             // returns a time on the clock, e.g. "14:00"; a LocalTime
+const timeInNewYork = now()     // returns an Instant in time (≡ a timestamp)
+    .atZone('America/New_York') // returns that Instant expressed in a certain time zone; a ZonedDateTime
+    .toLocalTime();             // returns a time on the clock without a date, a LocalTime
 ```
 
 
@@ -41,32 +41,40 @@ const timeInNewYork = Instant
 npm install globol
 ```
 
+# How to use
+Globol revolves around a few smart data types, of which `Instant`, `LocalDateTime`, `LocalDate`, `LocalTime` and `Duration` are the most important. You can create instances of any one of them with static methods from their classes. For instance, you can create an instance with `Instant.from(<js date>)` or `Instant.parse(<a formatted date string>)`. Similar methods exist on all Globol data types. Once a data type is instantiated, you can perform calculations and conversions with the methods on them.
+
 # Usage examples
 Get the current timestamp
 ```typescript
-Instant.now() // returns an Instant
+Instant.now()                // returns an Instant
+```
+
+Or use the shorthand
+```typescript
+now()                        // returns an Instant
 ```
 
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
-Instant.now()
-    .atZone('Europe/Berlin') // returns a ZonedDateTime
-    .toLocalTime() // returns a LocalTime
+now()                        // a timestamp
+    .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
+    .toLocalTime()           // returns a LocalTime, e.g. '14:57'
 ```
 
 # Core concepts
 This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them. The following are the most important datatypes, the ones that you should know of.
 
 ### Instant
-This is a moment in physical time. This is the thing you will likely use most often.
-### LocalDateTime
-A date with a time, e.g. `2020-01-20T19:34`
-### LocalDate
-A date, e.g. `2020-01-20`
-### LocalTime
-A time, e.g. `08:34:00.000`
+This is a moment in time, a timestamp. Is equivalent to a number of (milli)seconds since the epoch.
 ### ZonedDateTime
-A datetime with a zone offset, e.g. `2020-01-20T19:34Z+01`. Because it has an offset, it points to an unambiguous point in physical time, like Instant. Unlike `Instant`, however, this object cares about how the datetime is *represented*. For example: there can be a `ZonedDateTime` `2020-01-20T19:00Z+01` and a `ZonedDateTime` `2020-01-20T18:00Z+00`. They both correspond to the same moment in physical time, i.e. the same `Instant`, but they are two distinct `ZonedDateTimes`.
+A date with a time and a time zone offset, e.g. `2020-01-20T19:34Z+01`. A `ZonedDateTime` implies one `Instant`, but one `Instant` can be represented in at least 24 ZonedDateTimes (one for each time zone).
+### LocalDateTime
+A date and a time together, but without a zone, e.g. `2020-01-20T19:34`
+### LocalDate
+A date without a time, e.g. `2020-01-20`
+### LocalTime
+A time without a date, e.g. one LocalTime can mean `18:34` or `6:34 PM`, depending on how you format it in string form.
 ### Duration
 A fixed length of physical time.
 ### ZoneId & ZoneOffset
