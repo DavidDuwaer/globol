@@ -42,7 +42,33 @@ npm install globol
 ```
 
 # How to use
-Globol revolves around a few smart data types, of which `Instant`, `LocalDateTime`, `LocalDate`, `LocalTime` and `Duration` are the most important. You can create instances of any one of them with static methods from their classes. For instance, you can create an instance with `Instant.from(<js date>)` or `Instant.parse(<a formatted date string>)`. Similar methods exist on all Globol data types. Once a data type is instantiated, you can perform calculations and conversions with the methods on them.
+This library consists mainly of a few smart data types that each describe a different concept of time.
+This is what they are and how they relate to eachother:
+
+<img width="600" src="https://github.com/Artiry/globol/blob/master/docs/type-diagram-1.0.svg?raw=true"/>
+
+You can create instances of any one of them with static methods from their classes, e.g. `Instant.from(...)`,
+`Instant.parse(...)` or `LocalTime.browser()`.
+Similar methods exist on all Globol data types.
+Once a data type is instantiated, there are methods for converting between them and doing calculations and
+comparisons with them.
+
+Below is a dedicated description for each data type.
+
+### Instant
+This is a moment in time, a timestamp. Is equivalent to a number of (milli)seconds since the epoch.
+### ZonedDateTime
+A date with a time and a time zone offset, e.g. `2020-01-20T19:34Z+01`. A `ZonedDateTime` implies one `Instant`, but one `Instant` can be represented in at least 24 ZonedDateTimes (one for each time zone).
+### LocalDateTime
+A date and a time together, but without a zone, e.g. `2020-01-20T19:34`
+### LocalDate
+A date without a time, e.g. `2020-01-20`
+### LocalTime
+A time without a date, e.g. one LocalTime can mean `18:34` or `6:34 PM`, depending on how you format it in string form.
+### Duration
+A fixed length of physical time.
+### ZoneId & ZoneOffset
+These represent timezones. The difference between ZoneId and ZoneOffset is as follows: ZoneId represents something like `Europe/Amsterdam`, which can have a `ZoneOffset` of +1 in the winter and +2 in the summer.
 
 # Usage examples
 Get the current timestamp
@@ -61,24 +87,6 @@ now()                        // a timestamp
     .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
     .toLocalTime()           // returns a LocalTime, e.g. '14:57'
 ```
-
-# Core concepts
-This library consists of a few key datatypes. The library provides plenty of methods to convert between instantiations of them. The following are the most important datatypes, the ones that you should know of.
-
-### Instant
-This is a moment in time, a timestamp. Is equivalent to a number of (milli)seconds since the epoch.
-### ZonedDateTime
-A date with a time and a time zone offset, e.g. `2020-01-20T19:34Z+01`. A `ZonedDateTime` implies one `Instant`, but one `Instant` can be represented in at least 24 ZonedDateTimes (one for each time zone).
-### LocalDateTime
-A date and a time together, but without a zone, e.g. `2020-01-20T19:34`
-### LocalDate
-A date without a time, e.g. `2020-01-20`
-### LocalTime
-A time without a date, e.g. one LocalTime can mean `18:34` or `6:34 PM`, depending on how you format it in string form.
-### Duration
-A fixed length of physical time.
-### ZoneId & ZoneOffset
-These represent timezones. The difference between ZoneId and ZoneOffset is as follows: ZoneId represents something like `Europe/Amsterdam`, which can have a `ZoneOffset` of +1 in the winter and +2 in the summer.
 
 # Future work
 ## Time zone information
