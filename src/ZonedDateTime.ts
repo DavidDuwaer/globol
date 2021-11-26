@@ -28,6 +28,10 @@ export class ZonedDateTime
 		return ZonedDateTime.fromJS(new Date());
 	}
 
+	/**
+	 * Instantiates a {@link ZonedDateTime} of the instant expressed by the supplied {@link Date}. Because a
+	 * {@link Date} carries no time zone information, time zone is obtained with {@link ZoneId.browser()}.
+	 */
 	public static fromJS(jsDate: Date)
 	{
 		const zoneIdString = moment.tz.guess() as ZoneIdString;
