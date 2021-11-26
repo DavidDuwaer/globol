@@ -44,9 +44,12 @@ npm install globol
 # How to use
 This library consists mainly of a few smart data types that each describe a different concept of time.
 This is what they are and how they relate to eachother:
+<br>
+<br>
 <p align="center">
 <img width="600" src="https://github.com/Artiry/globol/blob/master/docs/type-diagram-1.0.svg?raw=true"/>
 </p>
+<br>
 You can create instances of any one of them with static methods from their classes, e.g. `Instant.from(...)`,
 `Instant.parse(...)` or `LocalTime.browser()`.
 Similar methods exist on all Globol data types.
