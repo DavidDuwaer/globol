@@ -1,9 +1,10 @@
 import moment from 'moment-timezone';
 import {requireValidZoneIdString} from "./util/requireValidZoneIdString";
+import {TimeZone} from './TimeZone';
 
 export type ZoneIdString = 'Europe/Amsterdam' | 'UTC' | 'America/New_York'; // todo: add all other IDs that occur in tz database
 
-export class ZoneId
+export class ZoneId implements TimeZone
 {
 	private readonly zoneId: ZoneIdString;
 

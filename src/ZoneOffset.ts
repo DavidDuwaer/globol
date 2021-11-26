@@ -1,4 +1,6 @@
-export class ZoneOffset
+import {TimeZone} from './TimeZone';
+
+export class ZoneOffset implements TimeZone
 {
 	private readonly nrOfSeconds: number;
 
