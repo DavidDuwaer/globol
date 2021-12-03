@@ -4,12 +4,13 @@ import {TimeZone} from './TimeZone';
 
 export type ZoneIdString = 'Europe/Amsterdam' | 'UTC' | 'America/New_York'; // todo: add all other IDs that occur in tz database
 
-export class ZoneId implements TimeZone
+export class ZoneId extends TimeZone
 {
 	private readonly zoneId: ZoneIdString;
 
 	private constructor(zoneId: ZoneIdString)
 	{
+		super();
 		this.zoneId = requireValidZoneIdString(zoneId);
 	}
 

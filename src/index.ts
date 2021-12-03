@@ -9,3 +9,4 @@ export {LocalTime, HourNumber, MinuteNumber} from './LocalTime';
 export {ZonedDateTime} from './ZonedDateTime';
 export {ZoneId, ZoneIdString} from './ZoneId';
 export {ZoneOffset} from './ZoneOffset';
+export {TimeZone} from './TimeZone';
