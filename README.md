@@ -42,11 +42,42 @@ npm install globol
 ```
 
 # How to use
+Get the current timestamp
+```typescript
+import {Instant} from 'globol';
+
+Instant.now()                // returns an Instant
+```
+All types and functions are in the `globol` module, so we'll leave the import statement out from now.
+You can also use a shorthand for the current time:
+
+```typescript
+now()                        // returns an Instant
+```
+
+Get "tomorrow, in this timezone"
+```typescript
+const tomorrow = now()
+    .atZone(TimeZone.browser())
+    .toLocalDate()
+    .plus({days: 1});
+```
+
+Get the current time on the clock (e.g. '14:57') in Berlin
+```typescript
+now()                        // a timestamp
+    .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
+    .toLocalTime()           // returns a LocalTime, e.g. '14:57'
+```
 This library consists mainly of a few smart data types that each describe a different concept of time.
 This is what they are and how they relate to eachother:
+<br/>
+<br/>
 <p align="center">
 <img width="600" src="https://github.com/Artiry/globol/blob/master/docs/type-diagram-1.0.svg?raw=true"/>
 </p>
+<br/>
+
 You can create instances of any one of them with static methods from their classes, e.g. `Instant.from(...)`,
 `Instant.parse(...)` or `LocalTime.browser()`.
 Similar methods exist on all Globol data types.
@@ -69,24 +100,6 @@ A time without a date, e.g. one LocalTime can mean `18:34` or `6:34 PM`, dependi
 A fixed length of physical time.
 ### ZoneId & ZoneOffset
 These represent timezones. The difference between ZoneId and ZoneOffset is as follows: ZoneId represents something like `Europe/Amsterdam`, which can have a `ZoneOffset` of +1 in the winter and +2 in the summer.
-
-# Usage examples
-Get the current timestamp
-```typescript
-Instant.now()                // returns an Instant
-```
-
-Or use the shorthand
-```typescript
-now()                        // returns an Instant
-```
-
-Get the current time on the clock (e.g. '14:57') in Berlin
-```typescript
-now()                        // a timestamp
-    .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
-    .toLocalTime()           // returns a LocalTime, e.g. '14:57'
-```
 
 # Future work
 ## Time zone information
