@@ -57,9 +57,9 @@ now()                        // returns an Instant
 
 Get "tomorrow, in this timezone"
 ```typescript
-const tomorrow = now()
-    .atZone(TimeZone.browser())
-    .toLocalDate()
+const tomorrow = now()          // returns Instant
+    .atZone(TimeZone.browser()) // ZonedDateTime
+    .toLocalDate()              // LocalDate (dropped the zone and the time)
     .plus({days: 1});
 ```
 
