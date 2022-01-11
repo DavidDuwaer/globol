@@ -2,7 +2,7 @@
 <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
  </p>
 <p align="center">
- Date & time library built for Typescript <i>first</i>.<br>
+ General purpose date & time library built for Typescript & Javascript.<br>
  Optimized for ease of use, speed of use and minimization of bugs.
  </p>
  <p align="center">
@@ -17,9 +17,9 @@
 
 * Dates, times, timestamps, time zones, durations.
 * Conversion between them and calculations with them.
-* **Type safe**. You want to express an moment in time, a date on a calendar, a time on the clock? If one the last two, in which time zone, or none at all? It turns out that keeping these concepts in distinct makes working with time intuitive.
+* **Type safe**. You want to express an moment in time, a date on a calendar, a time on the clock? If one the last two, in which time zone, or none at all? No longer will these nuances overwhelm or confuse. It turns out it is very easy, we just needed the right API.
 * **Immutable**.
-* **Fail early**. No more `NaN`'s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
+* **Fail early**. No `NaN`s sneaking into your date objects or anything like that. Globol checks its input, and throws errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
 * **In-place documentation**. Help yourself without leaving your IDE, with extensive JSDoc on all methods and functions.
 * ISO-8601-compliant serilization/deserialization of all data representations.
