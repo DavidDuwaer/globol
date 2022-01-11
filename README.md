@@ -17,7 +17,7 @@ Easy to use, fast to use & helps avoid bugs.
 
 * Dates, times, timestamps, time zones, durations, weekdays.
 * Conversion between them and arithmetics with them.
-* **Type safe**. You want to express an moment in time, a date on a calendar, a time on the clock? In a specific time zone, or you don't care? No longer will these nuances overwhelm or confuse. It turns out time is very easy: you just needed the right API.
+* **Type safe**. You want to express an moment in time, a date on a calendar, a time on the clock? In a specific time zone, or you don't care? No longer will nuances like these overwhelm or confuse. It turns out time is very easy: you just needed the right API.
 * **Immutable**.
 * **Fail early**. No `NaN`s sneaking into your date objects or anything like that. Globol checks its input, and throws errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
