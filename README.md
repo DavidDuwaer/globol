@@ -3,7 +3,7 @@
  </p>
 <p align="center">
  General purpose date & time library built for Typescript & Javascript.<br>
- Optimized for ease of use, speed of use and minimization of bugs.
+ Made for ease of use, speed of use and bug prevention.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
