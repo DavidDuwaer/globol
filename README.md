@@ -2,8 +2,8 @@
 <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
  </p>
 <p align="center">
- General purpose date & time library built for Typescript & Javascript.<br>
-Easy to use, fast to use & helps avoid bugs.
+ General purpose date & time library for Typescript & Javascript.<br>
+Taken the best API for time, java.time, combined with the power TS/JS.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
