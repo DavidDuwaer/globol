@@ -3,7 +3,7 @@
  </p>
 <p align="center">
  General purpose date & time library for Typescript & Javascript.<br>
-Taken the best API for time, java.time, combined with the power TS/JS.
+A port of the best API for time, java.time, made even better with the power TS/JS.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
