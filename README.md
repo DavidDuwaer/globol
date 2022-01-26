@@ -69,8 +69,8 @@ now()                        // a timestamp
     .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
     .toLocalTime()           // returns a LocalTime, e.g. '14:57'
 ```
-This library consists mainly of a few smart data types that each describe a different concept of time.
-This is what they are and how they relate to eachother:
+This library consists mainly of a few smart data types that each describe a different concept of time. The most important one is `Instant`, which denotes a point in time, regardless of time zone. A map with the other types:
+
 <br/>
 <br/>
 <p align="center">
