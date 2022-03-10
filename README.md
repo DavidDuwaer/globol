@@ -2,8 +2,8 @@
 <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
  </p>
 <p align="center">
- Date & time library built for Typescript <i>first</i>.<br>
- Optimized for ease of use, speed of use and minimization of bugs.
+ General purpose date & time library for Typescript & Javascript.<br>
+Based on porting the best API for time, java.time; made even better with the power of TS/JS.
  </p>
  <p align="center">
  <a href="https://badge.fury.io/js/globol">
@@ -15,11 +15,11 @@
 <a href='https://coveralls.io/github/Artiry/globol?branch=master'><img src='https://coveralls.io/repos/github/Artiry/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
  </p>
 
-* Dates, times, timestamps, time zones, durations.
-* Conversion between them and calculations with them.
-* **Type safe**. An API that *works*. No comparing apples and oranges. You want to express an instant in time, a date on a calendar, a time on the clock? When zones come into play, they are not interchangeable. No longer are these concepts all thrown into one date type. Clearly de-obfuscated, dates & time become intuitive.
+* Dates, times, timestamps, time zones, durations, weekdays.
+* Conversion between them and arithmetics with them.
+* **Type safe**. You want to express an moment in time, a date on a calendar, a time on the clock? In a specific time zone, or you don't care? No longer will nuances like these overwhelm or confuse. It turns out time is very easy: you just needed the right API.
 * **Immutable**.
-* **Fail early**. No more `NaN`'s slipping into your date objects. Globol checks its input, and throws errors with helpful messages if there's something wrong.
+* **Fail early**. No `NaN`s sneaking into your date objects or anything like that. Globol checks its input, and throws errors with helpful messages if there's something wrong.
 * **Fluent**. No searching the web for which functions suit your needs, but finding what you need with auto-complete.
 * **In-place documentation**. Help yourself without leaving your IDE, with extensive JSDoc on all methods and functions.
 * ISO-8601-compliant serilization/deserialization of all data representations.
@@ -57,9 +57,9 @@ now()                        // returns an Instant
 
 Get "tomorrow, in this timezone"
 ```typescript
-const tomorrow = now()
-    .atZone(TimeZone.browser())
-    .toLocalDate()
+const tomorrow = now()          // returns an Instant
+    .atZone(TimeZone.browser()) // returns a ZonedDateTime
+    .toLocalDate()              // returns a LocalDate (dropped the zone and the time)
     .plus({days: 1});
 ```
 
@@ -69,8 +69,8 @@ now()                        // a timestamp
     .atZone('Europe/Berlin') // returns a ZonedDateTime: the timestamp represented in this zone
     .toLocalTime()           // returns a LocalTime, e.g. '14:57'
 ```
-This library consists mainly of a few smart data types that each describe a different concept of time.
-This is what they are and how they relate to eachother:
+This library consists mainly of a few smart data types that each describe a different concept of time. The most important one is `Instant`, which denotes a point in time, regardless of time zone. A map with the other types:
+
 <br/>
 <br/>
 <p align="center">
