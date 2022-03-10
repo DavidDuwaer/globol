@@ -121,6 +121,16 @@ export class LocalDate
 		else return false;
 	}
 
+	/**
+	 * The difference in days between this date and the other date.
+	 * E.g. when called with this date being 2021-02-29 and 'other' being
+	 * 2021-02-28, the resulting value is 1.
+	 */
+	public diffInDays(other: LocalDate) {
+		return this.toMoment()
+			.diff(other.toMoment(), 'days');
+	}
+
 	public atTime(localTime: LocalTime): LocalDateTime
 	{
 		return LocalDateTime.of(

@@ -23,6 +23,24 @@ describe('LocalDate', () => {
         testParseAndToString('2021-01-01');
         testParseAndToString('-500-01-01', '-0500-01-01');
     });
+    describe('.diffInDays method', () => {
+        const values = [
+            {subject: '2021-03-29', other: '2021-03-28', expect: 1},
+            {subject: '2021-03-29', other: '2021-03-27', expect: 2},
+            {subject: '2021-03-26', other: '2021-02-26', expect: 28},
+            {subject: '2020-03-26', other: '2020-02-26', expect: 29},
+            {subject: '2020-02-26', other: '2020-03-26', expect: -29},
+            {subject: '2020-02-26', other: '2020-02-26', expect: 0},
+            {subject: '2019-03-26', other: '2020-03-26', expect: -366},
+            {subject: '2020-03-26', other: '2021-03-26', expect: -365},
+        ];
+        values.forEach(({subject, other, expect}) => {
+            it(`${subject} minus ${other} is ${expect}`, () => assert.equal(
+                expect,
+                LocalDate.parse(subject).diffInDays(LocalDate.parse(other))
+            ))
+        })
+    });
     describe('.isBefore method', () => {
         function assertIsBefore(a: string, b: string, expect: boolean)
         {
