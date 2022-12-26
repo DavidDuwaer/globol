@@ -217,7 +217,8 @@ export class Duration
 
     /**
      *
-     * @param formatString
+     * @param formatString A string describing the serialization
+     * format with the following placeholders:
      * <ul>
      *     <li><b>Y</b> years component. E.g.: 23, 23237</li>
      *     <li><b>D</b> days component. E.g.: 6, 237</li>
@@ -229,19 +230,28 @@ export class Duration
      *     <li><b>ss</b> seconds component, padded to two digits. E.g.: 08, 55</li>
      *     <li><b>SS</b> milliseconds component, unpadded. E.g.: 8, 273</li>
      *     <li><b>SSS</b> milliseconds component, padded to three digits. E.g.: 008, 273</li>
-     * </ul
+     * </ul>
+     * Any literal strings that should not be substituted as above should be surrounded
+     * by brackets (`[]`).
      */
     public format(formatString: string) {
+        const literals: string[] = [];
+        const literalRegex = /\[([^\]]*)]/g;
         return formatString
-            .replace('SSS', padToThreeDigits(this.milliseconds))
+            .replace(literalRegex, r => {
+                literals.push(r.replace(literalRegex, '$1'));
+                return '[]';
+            })
+            .replace('SSS', `${padToThreeDigits(this.milliseconds)}`)
             .replace('S', `${this.milliseconds}`)
-            .replace('ss', padToTwoDigits(this.seconds))
+            .replace('ss', `${padToTwoDigits(this.seconds)}`)
             .replace('s', `${this.seconds}`)
-            .replace('mm', padToTwoDigits(this.minutes))
+            .replace('mm', `${padToTwoDigits(this.minutes)}`)
             .replace('m', `${this.minutes}`)
-            .replace('HH', padToTwoDigits(this.hours))
+            .replace('HH', `${padToTwoDigits(this.hours)}`)
             .replace('H', `${this.hours}`)
             .replace('D', `${this.days}`)
-            .replace('Y', `${this.years}`);
+            .replace('Y', `${this.years}`)
+            .replace(literalRegex, literals.splice(0, 1)[0]!)
     }
 }

@@ -51,5 +51,14 @@ describe('Duration', () => {
         it('formats "Y-D-H:mm:ss.SSS"', () => {
             assert.equal(duration.format('Y-D-H:mm:ss.SSS'), '9-8-7:06:05.004')
         })
+        it('respects escaping "s.SSS\s"', () => {
+            assert.equal(duration.format('s.SSS\s'), '5.004s')
+        })
+        it('respects escaping "s[S]"', () => {
+            assert.equal(duration.format('s[S]'), '5S')
+        })
+        it('respects escaping "s[SSS]"', () => {
+            assert.equal(duration.format('s[SSS]'), '5SSS')
+        })
     })
 });
