@@ -32,7 +32,7 @@
   "scripts": {
     "clear": "rimraf dist",
     "build": "npm run clear && tsc",
-    "pretest": "npm build",
+    "pretest": "npm run build",
     "build-dev": "npm run clear && tsc --sourceMap",
     "test": "npm run build-dev && nyc mocha -r ts-node/register tests/**/*.test.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",

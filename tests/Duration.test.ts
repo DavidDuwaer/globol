@@ -35,4 +35,21 @@ describe('Duration', () => {
             assert.throws(() => Duration.of({seconds: 0.0002}));
         })
     });
+
+    describe('.format method', () => {
+        const duration = Duration.of({
+            years: 9,
+            days: 8,
+            hours: 7,
+            minutes: 6,
+            seconds: 5,
+            millis: 4,
+        })
+        it('formats "H:mm:ss.SSS"', () => {
+            assert.equal(duration.format('H:mm:ss.SSS'), '7:06:05.004')
+        })
+        it('formats "Y-D-H:mm:ss.SSS"', () => {
+            assert.equal(duration.format('Y-D-H:mm:ss.SSS'), '9-8-7:06:05.004')
+        })
+    })
 });

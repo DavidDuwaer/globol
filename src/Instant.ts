@@ -113,21 +113,31 @@ export class Instant
 	/**
 	 * Alias for {@link .minus}
 	 */
+	public subtract(instant: Instant): Duration
 	public subtract(duration: DurationSpec): Instant
 	public subtract(duration: Duration): Instant
-	public subtract(duration: Duration | DurationSpec): Instant
+	public subtract(duration: Duration | DurationSpec | Instant): Instant | Duration
+	public subtract(other: Duration | DurationSpec | Instant): Instant | Duration
 	{
-		return this.minus(duration);
+		return this.minus(other);
 	}
 
+	public minus(instant: Instant): Duration
 	public minus(duration: DurationSpec): Instant
 	public minus(duration: Duration): Instant
-	public minus(duration: Duration | DurationSpec): Instant
+	public minus(duration: Duration | DurationSpec | Instant): Instant | Duration
+	public minus(other: Duration | DurationSpec | Instant): Instant | Duration
 	{
-		const asDuration = duration instanceof Duration
-			? duration
-			: Duration.of(duration);
-		return Instant.ofEpochMilli(this.toEpochMilli() - asDuration.asMillis);
+		if (other instanceof Instant) {
+			return Duration.ofMilliseconds(
+				this.toEpochMilli() - other.toEpochMilli()
+			);
+		} else {
+			const asDuration = other instanceof Duration
+				? other
+				: Duration.of(other);
+			return Instant.ofEpochMilli(this.toEpochMilli() - asDuration.asMillis);
+		}
 	}
 
 	public minusSeconds(secondsToAdd: number)

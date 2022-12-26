@@ -153,15 +153,13 @@ export class LocalDate
 		return LocalDate.from(targetDate);
 	}
 
-	minus({days}: {days: number}): LocalDate
-	{
+	minus({days}: {days: number}): LocalDate {
 		return this.plus({
 			days: -days,
 		});
 	}
 
-	public get dayOfWeek(): DayOfWeek
-	{
+	public get dayOfWeek(): DayOfWeek {
 		return DayOfWeek.of(this.isoWeekDayNumber);
 	}
 

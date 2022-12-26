@@ -2,6 +2,8 @@ import moment, {Duration as MomentDuration} from 'moment';
 import {Instant} from "./Instant";
 import {DurationSpec} from "./DurationSpec";
 import {requireInt} from "./util/requireInt";
+import {padToThreeDigits} from "./util/padToThreeDigits";
+import {padToTwoDigits} from "./util/padToTwoDigits";
 
 export class Duration
 {
@@ -211,5 +213,35 @@ export class Duration
     public get milliseconds()
     {
         return this.momentDuration.milliseconds();
+    }
+
+    /**
+     *
+     * @param formatString
+     * <ul>
+     *     <li><b>Y</b> years component. E.g.: 23, 23237</li>
+     *     <li><b>D</b> days component. E.g.: 6, 237</li>
+     *     <li><b>H</b> hours component, unpadded. E.g.: 2, 23</li>
+     *     <li><b>HH</b> hours component, padded to two digits. E.g.: 02, 23</li>
+     *     <li><b>m</b> minutes component, unpadded. E.g.: 8, 48</li>
+     *     <li><b>mm</b> minutes component, padded to two digits. E.g.: 08, 48</li>
+     *     <li><b>s</b> seconds component, unpadded. E.g.: 8, 55</li>
+     *     <li><b>ss</b> seconds component, padded to two digits. E.g.: 08, 55</li>
+     *     <li><b>SS</b> milliseconds component, unpadded. E.g.: 8, 273</li>
+     *     <li><b>SSS</b> milliseconds component, padded to three digits. E.g.: 008, 273</li>
+     * </ul
+     */
+    public format(formatString: string) {
+        return formatString
+            .replace('SSS', padToThreeDigits(this.milliseconds))
+            .replace('S', `${this.milliseconds}`)
+            .replace('ss', padToTwoDigits(this.seconds))
+            .replace('s', `${this.seconds}`)
+            .replace('mm', padToTwoDigits(this.minutes))
+            .replace('m', `${this.minutes}`)
+            .replace('HH', padToTwoDigits(this.hours))
+            .replace('H', `${this.hours}`)
+            .replace('D', `${this.days}`)
+            .replace('Y', `${this.years}`);
     }
 }

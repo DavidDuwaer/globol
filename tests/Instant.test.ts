@@ -1,5 +1,5 @@
 import {Duration, Instant, now} from "../dist";
-import {assert} from "chai";
+import {assert, expect} from "chai";
 import {LocalDate, LocalDateTime, LocalTime, ZoneId} from "../src";
 import {} from "mocha";
 import {DurationSpec} from "../src/DurationSpec";
@@ -60,6 +60,22 @@ describe('instant', () => {
             testAddition(Instant.parse('2021-03-28T03:45+02:00'), {minutes: 15});
             testAddition(Instant.parse('2021-03-28T03:45+03:00'), {seconds: 15});
             testAddition(Instant.parse('2021-03-28T03:45+04:00'), {millis: 15});
+        });
+    });
+    describe('.minus(DurationSpec) method', () => {
+        it('subtracts duration correctly', () => {
+            assert.equal(
+                Instant.parse('2021-03-28T00:45+00:00').minus({years: 15}).toEpochMilli(),
+                Instant.parse('2006-03-28T00:45+00:00').toEpochMilli()
+            )
+        });
+    });
+    describe('.minus(Instant) method', () => {
+        it('subtracts instant correctly', () => {
+            assert.equal(
+                Instant.parse('2021-03-28T00:45+00:00').minus(Instant.parse('2021-03-27T00:45+00:00')).asHours,
+                24
+            )
         });
     });
 });

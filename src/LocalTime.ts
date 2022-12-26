@@ -4,6 +4,8 @@ import {requireValidSecondNumber} from "./util/requireValidSecondNumber";
 import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber";
 import {LocalDateTime} from "./LocalDateTime";
 import {LocalDate} from "./LocalDate";
+import {padToThreeDigits} from "./util/padToThreeDigits";
+import {padToTwoDigits} from "./util/padToTwoDigits";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -128,14 +130,4 @@ export class LocalTime
 				))
 			))
 	}
-}
-
-function padToTwoDigits(aNumber: number): string
-{
-	return `00${aNumber}`.slice(-2);
-}
-
-function padToThreeDigits(aNumber: number): string
-{
-	return `000${aNumber}`.slice(-3);
 }
