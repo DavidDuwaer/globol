@@ -4,8 +4,9 @@ import {requireValidSecondNumber} from "./util/requireValidSecondNumber";
 import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber";
 import {LocalDateTime} from "./LocalDateTime";
 import {LocalDate} from "./LocalDate";
-import {padToThreeDigits} from "./util/padToThreeDigits";
 import {padToTwoDigits} from "./util/padToTwoDigits";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
+import {defaults} from "./defaults";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -83,15 +84,24 @@ export class LocalTime
 	/**
 	 * To ISO-8601 string, e.g. "17:34:00.000" or "13:53"
 	 */
-	public toString()
+	public toString(options?: ISOSerializationOptions)
 	{
+		const {
+			numberOfISO8601SecondDigits: digits = 3,
+		} = {...defaults, ...options};
+
 		let value = padToTwoDigits(this.hour)
 			+ ':'
 			+ padToTwoDigits(this.minute);
-		if (this.second > 0)
+		if (this.second > 0) {
 			value += `:${padToTwoDigits(this.second)}`;
-		if (this.millisecond> 0)
-			value += `.${padToThreeDigits(this.millisecond)}`;
+		}
+		if (this.millisecond > 0) {
+			value += `.${
+				`${Math.round(this.millisecond * 10^(digits - 3))}`
+					.padStart(digits, '0')
+			}`;
+		}
 		return value;
 	}
 

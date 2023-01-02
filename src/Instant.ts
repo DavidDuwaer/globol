@@ -5,6 +5,8 @@ import {requireValidDate} from "./util/requireValidDate";
 import {requireInt} from "./util/requireInt";
 import {toZoneId} from "./util/toZoneId";
 import {DurationSpec} from "./DurationSpec";
+import {defaults} from "./defaults";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
 
 export class Instant
 {
@@ -212,9 +214,23 @@ export class Instant
 	/**
 	 * A string representation of this {@link Instant} in ISO-8601 notation. E.g. "2021-05-16T11:21:32.329Z"
 	 */
-	public toString(): string
+	public toString(options?: ISOSerializationOptions): string
 	{
-		return this.toJS().toISOString();
+		const {
+			numberOfISO8601SecondDigits: digits
+		} = {...defaults, ...options};
+		const defaultISOString = this.toJS().toISOString();
+		if (digits !== undefined) {
+			return defaultISOString
+				.replace(
+					/\d{2}\.\d{3,}(?=Z$)/,
+					num => Number(num)
+						.toFixed(digits)
+						.padStart(3 + digits, "0")
+				)
+		} else {
+			return defaultISOString
+		}
 	}
 
 	/**

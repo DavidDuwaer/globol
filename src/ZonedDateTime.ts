@@ -6,6 +6,8 @@ import {HourNumber, LocalTime, MinuteNumber} from './LocalTime';
 import {ZoneId, ZoneIdString} from './ZoneId';
 import {requireValidMoment} from "./util/requireValidMoment";
 import {requireValidDate} from "./util/requireValidDate";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
+import {defaults} from "./defaults";
 
 export class ZonedDateTime
 {
@@ -152,9 +154,23 @@ export class ZonedDateTime
 	/**
 	 * To ISO-8601 string, e.g. "2020-01-23T17:34:00.000Z"
 	 */
-	public toString(): string
+	public toString(options?: ISOSerializationOptions): string
 	{
-		return this.zonedMoment.toISOString(true);
+		const {
+			numberOfISO8601SecondDigits: digits
+		} = {...defaults, ...options};
+		const defaultISOString = this.zonedMoment.toISOString(true);
+		if (digits !== undefined) {
+			return defaultISOString
+				.replace(
+					/\d{2}\.\d{3,}(?=Z$)/,
+					num => Number(num)
+						.toFixed(digits)
+						.padStart(3 + digits, "0")
+				)
+		} else {
+			return defaultISOString
+		}
 	}
 
 	public toJS(): Date

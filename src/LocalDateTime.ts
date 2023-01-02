@@ -10,6 +10,7 @@ import {newValidMoment} from "./util/newValidMoment";
 import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
 import {requireValidMoment} from "./util/requireValidMoment";
 import {toZoneId} from "./util/toZoneId";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
 
 export class LocalDateTime
 {
@@ -168,9 +169,9 @@ export class LocalDateTime
 	/**
 	 * To ISO-8601 string, e.g. "2020-01-23T17:34:00.000"
 	 */
-	public toString(): string
+	public toString(options?: ISOSerializationOptions): string
 	{
-		return `${this.date.toString()}T${this.time.toString()}`;
+		return `${this.date.toString()}T${this.time.toString(options)}`;
 	}
 
 	private get isoWeekDayNumber(): IsoWeekDayNumber

@@ -78,6 +78,32 @@ describe('instant', () => {
             )
         });
     });
+    describe('.toString(...) method', () => {
+        it('serializes correctly', () => {
+            assert.equal(
+                Instant.parse('2021-03-28T00:45+00:00').toString(),
+                '2021-03-28T00:45:00.000Z'
+            )
+        })
+        it('respects reduced digits', () => {
+            assert.equal(
+                Instant.parse('2021-03-28T00:45:23.456+00:00')
+                    .toString({
+                        numberOfISO8601SecondDigits: 2
+                    }),
+                '2021-03-28T00:45:23.46Z'
+            )
+        })
+        it('respects increased digits', () => {
+            assert.equal(
+                Instant.parse('2021-03-28T00:45:23.456+00:00')
+                    .toString({
+                        numberOfISO8601SecondDigits: 5
+                    }),
+                '2021-03-28T00:45:23.45600Z'
+            )
+        })
+    })
 });
 
 describe('now() function', () => {
