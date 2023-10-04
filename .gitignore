@@ -8,3 +8,5 @@ dist
 .idea
 !.idea/codeStyleSettings.xml
 *.iml
+
+.nyc_output
