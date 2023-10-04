@@ -12,7 +12,7 @@ Based on porting the best API for time, java.time; made even better with the pow
   <a href="https://travis-ci.org/github/Artiry/globol">
   <img src="https://travis-ci.org/Artiry/globol.svg?branch=master"/>
  </a>
-<a href='https://coveralls.io/github/Artiry/globol?branch=master'><img src='https://coveralls.io/repos/github/Artiry/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
+<a href='https://coveralls.io/github/DavidDuwaer/globol?branch=master'><img src='https://coveralls.io/repos/github/DavidDuwaer/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
  </p>
 
 * Dates, times, timestamps, time zones, durations, weekdays.
