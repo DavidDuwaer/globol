@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
-import {requireValidZoneIdString} from "./util/requireValidZoneIdString";
-import {TimeZone} from './TimeZone';
+import {requireValidZoneIdString} from "./util/requireValidZoneIdString.js";
+import {TimeZone} from './TimeZone.js';
 
 export type ZoneIdString = 'Europe/Amsterdam' | 'UTC' | 'America/New_York'; // todo: add all other IDs that occur in tz database
 

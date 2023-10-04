@@ -1,5 +1,5 @@
-import {isInt} from "./isInt";
-import {SecondNumber} from "../LocalTime";
+import {isInt} from "./isInt.js";
+import {SecondNumber} from "../LocalTime.js";
 
 export function requireValidSecondNumber(number: number): SecondNumber
 {

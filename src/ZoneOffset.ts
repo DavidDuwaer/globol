@@ -1,4 +1,4 @@
-import {TimeZone} from './TimeZone';
+import {TimeZone} from './TimeZone.js';
 
 export class ZoneOffset extends TimeZone
 {

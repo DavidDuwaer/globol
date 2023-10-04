@@ -1,5 +1,5 @@
-import {ZoneIdString} from "../ZoneId";
-import {isValidZoneIdString} from "./isValidZoneIdString";
+import {ZoneIdString} from "../ZoneId.js";
+import {isValidZoneIdString} from "./isValidZoneIdString.js";
 
 export function requireValidZoneIdString(zoneIdString: ZoneIdString)
 {

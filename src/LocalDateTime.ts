@@ -1,16 +1,16 @@
 import moment from 'moment-timezone';
-import {Instant} from './Instant';
-import {LocalDate} from './LocalDate';
-import {LocalTime} from './LocalTime';
-import {ZoneId, ZoneIdString} from './ZoneId';
-import {ZonedDateTime} from "./ZonedDateTime";
-import {DayOfWeek} from "./DayOfWeek";
-import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
-import {newValidMoment} from "./util/newValidMoment";
-import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
-import {requireValidMoment} from "./util/requireValidMoment";
-import {toZoneId} from "./util/toZoneId";
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
+import {Instant} from './Instant.js';
+import {LocalDate} from './LocalDate.js';
+import {LocalTime} from './LocalTime.js';
+import {ZoneId, ZoneIdString} from './ZoneId.js';
+import {ZonedDateTime} from "./ZonedDateTime.js";
+import {DayOfWeek} from "./DayOfWeek.js";
+import {IsoWeekDayNumber} from "./IsoWeekDayNumber.js";
+import {newValidMoment} from "./util/newValidMoment.js";
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber.js";
+import {requireValidMoment} from "./util/requireValidMoment.js";
+import {toZoneId} from "./util/toZoneId.js";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 
 export class LocalDateTime
 {

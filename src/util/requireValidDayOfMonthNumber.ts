@@ -1,5 +1,5 @@
-import {DayOfMonthNumber} from "../LocalDate";
-import {isInt} from "./isInt";
+import {DayOfMonthNumber} from "../LocalDate.js"
+import {isInt} from "./isInt.js"
 
 export function requireValidDayOfMonthNumber(number: number): DayOfMonthNumber
 {

@@ -1,5 +1,5 @@
 import {assert} from "chai";
-import {TimeZone, ZoneId} from "../src";
+import {TimeZone, ZoneId} from "../dist/index.js";
 
 describe('TimeZone', () => {
     describe('.browser()', () => {

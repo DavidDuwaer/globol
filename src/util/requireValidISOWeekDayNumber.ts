@@ -1,5 +1,5 @@
-import {requireInt} from "./requireInt";
-import {IsoWeekDayNumber} from "../IsoWeekDayNumber";
+import {requireInt} from "./requireInt.js";
+import {IsoWeekDayNumber} from "../IsoWeekDayNumber.js";
 
 export function requireValidISOWeekDayNumber(
     isoWeekDayNumber: number,

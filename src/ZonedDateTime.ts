@@ -1,13 +1,13 @@
 import moment from 'moment-timezone';
-import {Instant} from './Instant';
-import {DayOfMonthNumber, LocalDate, MonthNumber} from './LocalDate';
-import {LocalDateTime} from './LocalDateTime';
-import {HourNumber, LocalTime, MinuteNumber} from './LocalTime';
-import {ZoneId, ZoneIdString} from './ZoneId';
-import {requireValidMoment} from "./util/requireValidMoment";
-import {requireValidDate} from "./util/requireValidDate";
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
-import {defaults} from "./defaults";
+import {Instant} from './Instant.js';
+import {DayOfMonthNumber, LocalDate, MonthNumber} from './LocalDate.js';
+import {LocalDateTime} from './LocalDateTime.js';
+import {HourNumber, LocalTime, MinuteNumber} from './LocalTime.js';
+import {ZoneId, ZoneIdString} from './ZoneId.js';
+import {requireValidMoment} from "./util/requireValidMoment.js";
+import {requireValidDate} from "./util/requireValidDate.js";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
+import {defaults} from "./defaults.js";
 
 export class ZonedDateTime
 {

@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import {ZoneIdString} from "../ZoneId";
+import {ZoneIdString} from "../ZoneId.js";
 
 export function isValidZoneIdString(zoneIdString: ZoneIdString): boolean
 {

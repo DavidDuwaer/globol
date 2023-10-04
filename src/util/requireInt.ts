@@ -1,5 +1,4 @@
-import {isInt} from "./isInt";
-
+import {isInt} from "./isInt.js";
 export function requireInt(numberValue: number, message?: string): number
 {
     if (!isInt(numberValue))

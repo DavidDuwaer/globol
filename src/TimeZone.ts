@@ -1,4 +1,4 @@
-import {ZoneId} from './ZoneId';
+import {ZoneId} from './ZoneId.js';
 
 export abstract class TimeZone
 {

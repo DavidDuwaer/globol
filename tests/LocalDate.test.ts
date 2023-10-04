@@ -1,6 +1,6 @@
 import {assert} from "chai";
 import "mocha";
-import {LocalDate} from "../src";
+import {LocalDate} from "../dist/index.js";
 
 describe('LocalDate', () => {
     describe('.from factory method', () => {

@@ -1,5 +1,5 @@
-import {MonthNumber} from "../LocalDate";
-import {isInt} from "./isInt";
+import {MonthNumber} from "../LocalDate.js";
+import {isInt} from "./isInt.js";
 
 export function requireValidMonthNumber(number: number): MonthNumber
 {

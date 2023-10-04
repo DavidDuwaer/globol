@@ -1,5 +1,5 @@
-import {isInt} from "./isInt";
-import {HourNumber} from "../LocalTime";
+import {isInt} from "./isInt.js";
+import {HourNumber} from "../LocalTime.js";
 
 export function requireValidHourNumber(number: number): HourNumber
 {

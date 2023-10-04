@@ -1,9 +1,9 @@
 import moment, {Duration as MomentDuration} from 'moment';
-import {Instant} from "./Instant";
-import {DurationSpec} from "./DurationSpec";
-import {requireInt} from "./util/requireInt";
-import {padToThreeDigits} from "./util/padToThreeDigits";
-import {padToTwoDigits} from "./util/padToTwoDigits";
+import {Instant} from "./Instant.js";
+import {DurationSpec} from "./DurationSpec.js";
+import {requireInt} from "./util/requireInt.js";
+import {padToThreeDigits} from "./util/padToThreeDigits.js";
+import {padToTwoDigits} from "./util/padToTwoDigits.js";
 
 export class Duration
 {

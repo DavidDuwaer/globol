@@ -1,4 +1,4 @@
-import {ZoneId, ZoneIdString} from "../ZoneId";
+import {ZoneId, ZoneIdString} from "../ZoneId.js";
 
 export function toZoneId(arg: ZoneIdString | ZoneId): ZoneId
 {

@@ -1,8 +1,6 @@
-import {Duration, Instant, now} from "../dist";
-import {assert, expect} from "chai";
-import {LocalDate, LocalDateTime, LocalTime, ZoneId} from "../src";
-import {} from "mocha";
-import {DurationSpec} from "../src/DurationSpec";
+import {Duration, Instant, LocalDate, LocalDateTime, LocalTime, now, ZoneId} from "../dist/index.js";
+import {assert} from "chai";
+import {DurationSpec} from "../src/DurationSpec.js";
 
 describe('instant', () => {
     describe('.add(Duration)', () => {

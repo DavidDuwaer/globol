@@ -1,6 +1,6 @@
-import {DAY_OF_WEEK_ID_SUCCESSION, DayOfWeekId} from "./DayOfWeekId";
-import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
-import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
+import {DAY_OF_WEEK_ID_SUCCESSION, DayOfWeekId} from "./DayOfWeekId.js";
+import {IsoWeekDayNumber} from "./IsoWeekDayNumber.js"
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber.js"
 
 export class DayOfWeek
 {

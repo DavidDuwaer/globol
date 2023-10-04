@@ -1,13 +1,13 @@
 import {Moment} from 'moment';
-import {LocalDateTime} from './LocalDateTime';
-import {LocalTime} from './LocalTime';
-import {DayOfWeek} from "./DayOfWeek";
-import {IsoWeekDayNumber} from "./IsoWeekDayNumber";
-import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber";
-import {newValidMoment} from "./util/newValidMoment";
-import {requireInt} from "./util/requireInt";
-import {requireValidMonthNumber} from "./util/requireValidMonthNumber";
-import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber";
+import {LocalDateTime} from './LocalDateTime.js';
+import {LocalTime} from './LocalTime.js';
+import {DayOfWeek} from "./DayOfWeek.js";
+import {IsoWeekDayNumber} from "./IsoWeekDayNumber.js";
+import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber.js";
+import {newValidMoment} from "./util/newValidMoment.js";
+import {requireInt} from "./util/requireInt.js";
+import {requireValidMonthNumber} from "./util/requireValidMonthNumber.js";
+import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber.js";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;

@@ -1,4 +1,4 @@
-import {Duration} from "../dist";
+import {Duration} from "../dist/index.js";
 import {assert} from "chai";
 import {} from "mocha";
 

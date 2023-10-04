@@ -1,4 +1,4 @@
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 
 
 type Defaults = ISOSerializationOptions;

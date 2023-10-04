@@ -1,12 +1,12 @@
-import {requireValidHourNumber} from "./util/requireValidHourNumber";
-import {requireValidMinuteNumber} from "./util/requireValidMinuteNumber";
-import {requireValidSecondNumber} from "./util/requireValidSecondNumber";
-import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber";
-import {LocalDateTime} from "./LocalDateTime";
-import {LocalDate} from "./LocalDate";
-import {padToTwoDigits} from "./util/padToTwoDigits";
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
-import {defaults} from "./defaults";
+import {requireValidHourNumber} from "./util/requireValidHourNumber.js";
+import {requireValidMinuteNumber} from "./util/requireValidMinuteNumber.js";
+import {requireValidSecondNumber} from "./util/requireValidSecondNumber.js";
+import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber.js";
+import {LocalDateTime} from "./LocalDateTime.js";
+import {LocalDate} from "./LocalDate.js";
+import {padToTwoDigits} from "./util/padToTwoDigits.js";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
+import {defaults} from "./defaults.js";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19

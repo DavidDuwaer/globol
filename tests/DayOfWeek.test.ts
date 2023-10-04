@@ -1,6 +1,6 @@
 import {assert} from "chai";
 import "mocha";
-import {DayOfWeek} from "../src";
+import {DayOfWeek} from "../dist/index.js";
 
 describe('DayOfWeek', () => {
     describe('.parse factory method', () => {

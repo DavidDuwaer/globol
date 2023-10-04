@@ -1,12 +1,12 @@
-import {ZonedDateTime} from './ZonedDateTime';
-import {Duration} from "./Duration";
-import {ZoneId, ZoneIdString} from "./ZoneId";
-import {requireValidDate} from "./util/requireValidDate";
-import {requireInt} from "./util/requireInt";
-import {toZoneId} from "./util/toZoneId";
-import {DurationSpec} from "./DurationSpec";
-import {defaults} from "./defaults";
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions";
+import {ZonedDateTime} from './ZonedDateTime.js';
+import {Duration} from "./Duration.js";
+import {ZoneId, ZoneIdString} from "./ZoneId.js";
+import {requireValidDate} from "./util/requireValidDate.js";
+import {requireInt} from "./util/requireInt.js";
+import {toZoneId} from "./util/toZoneId.js";
+import {DurationSpec} from "./DurationSpec.js";
+import {defaults} from "./defaults.js";
+import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 
 export class Instant
 {
