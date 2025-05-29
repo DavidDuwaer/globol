@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 'node'
 before_install:
-- npm install -g typescript@1.0
+- npm install -g typescript
 script:
 - npm test
 after_success: npm run coverage

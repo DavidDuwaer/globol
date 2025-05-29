@@ -1,19 +1,21 @@
 <p align="center">
-<img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
- </p>
+  <img height="100px" src="https://github.com/Artiry/globol/blob/master/logo.png?raw=true">
+</p>
 <p align="center">
- General purpose date & time library for Typescript & Javascript.<br>
-Based on porting the best API for time, java.time; made even better with the power of TS/JS.
- </p>
- <p align="center">
- <a href="https://badge.fury.io/js/globol">
-  <img src="https://badge.fury.io/js/globol.svg"/>
- </a>
+  Date & time library for Typescript & Javascript.<br>
+  Port of the best time library in programming: java.time; made even better with the power of TS/JS.
+</p>
+<p align="center">
+  <a href="https://badge.fury.io/js/globol">
+    <img src="https://badge.fury.io/js/globol.svg"/>
+  </a>
   <a href="https://travis-ci.org/github/Artiry/globol">
-  <img src="https://travis-ci.org/Artiry/globol.svg?branch=master"/>
- </a>
-<a href='https://coveralls.io/github/DavidDuwaer/globol?branch=master'><img src='https://coveralls.io/repos/github/DavidDuwaer/globol/badge.svg?branch=master' alt='Coverage Status' /></a>
- </p>
+    <img src="https://travis-ci.org/Artiry/globol.svg?branch=master"/>
+  </a>
+  <a href='https://coveralls.io/github/DavidDuwaer/globol?branch=master'>
+    <img src='https://coveralls.io/repos/github/DavidDuwaer/globol/badge.svg?branch=master' alt='Coverage Status'/>
+  </a>
+</p>
 
 * Dates, times, timestamps, time zones, durations, weekdays.
 * Conversion between them and arithmetics with them.
@@ -27,16 +29,13 @@ Based on porting the best API for time, java.time; made even better with the pow
 * **Uses moment-timezone** for time zone information. Future work is to make this optionally injectable, so `globol` can be smaller for users that need it to be.
 
 Example:
-
 ```javascript
 const timeInNewYork = now()     // returns an Instant in time (≡ a timestamp)
     .atZone('America/New_York') // returns that Instant expressed in a certain time zone; a ZonedDateTime
-    .toLocalTime();             // returns a time on the clock without a date, a LocalTime
+    .toLocalTime()             // returns a time on the clock without a date, a LocalTime
 ```
 
-
 # Install
-
 ```typescript
 npm install globol
 ```
@@ -60,9 +59,15 @@ Get "tomorrow, in this timezone"
 const tomorrow = now()          // returns an Instant
     .atZone(TimeZone.browser()) // returns a ZonedDateTime
     .toLocalDate()              // returns a LocalDate (dropped the zone and the time)
-    .plus({days: 1});
+    .plus({days: 1})
 ```
 
+There's a shorthand for those first three lines:
+```typescript
+today()             // Current LocalDate in the browser's time zone
+  .plus({days: 1})  // Tomorrow's LocalDate in the browser's time zone
+```
+0
 Get the current time on the clock (e.g. '14:57') in Berlin
 ```typescript
 now()                        // a timestamp
@@ -106,11 +111,8 @@ These represent timezones. The difference between ZoneId and ZoneOffset is as fo
 Browsers provide time zone information, but the support is still limited/incomplete. Therefore we'd like to make it optional to include the moment-timezone dependency. This can be done by make a separate NPM dependency called `globol-timezone` which, when included, runtime-enriches Globol with the `moment-timezone` time zone information. When it's left out globol would rely on the time zone information supplied by the browser.
 
 # Feedback
-
 If something is missing from this library that makes it not fit your use case today, or if you find a bug that spoils
 it for you, don't hesitate to create an Issue (just a stub is better than nothing!) or a Pull Request. At this moment, the library is not at 1.0 yet and is organically growing to suit the use cases we run into first! Any feedback and/or contribution is sincerely appreciated.
 
-
 # License
-
 The content of this project is licensed under the MIT license.
