@@ -77,6 +77,7 @@ export class Instant
 
 	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
 	public atZone(zoneId: ZoneId): ZonedDateTime
+	public atZone(timeZone: ZoneId | ZoneIdString): ZonedDateTime
 	public atZone(arg: ZoneId | ZoneIdString): ZonedDateTime
 	{
 		return new ZonedDateTime(this.toJS(), toZoneId(arg));
