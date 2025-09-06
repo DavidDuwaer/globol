@@ -31,9 +31,9 @@ export class ZoneId extends TimeZone
 		);
 	}
 
-	public static of(zoneId: ZoneIdString)
+	public static of(zoneId: ZoneIdString | string)
 	{
-		return new ZoneId(zoneId);
+		return new ZoneId(zoneId as ZoneIdString);
 	}
 
 	public static equal(
