@@ -24,7 +24,6 @@ export type SecondNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49
 	| 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59;
 
-
 export class LocalTime
 {
 	public readonly hour: HourNumber;
@@ -32,12 +31,10 @@ export class LocalTime
 	public readonly second: SecondNumber;
 	public readonly millisecond: number;
 
-	constructor(
-		hour: HourNumber,
-		minute: MinuteNumber,
-		second: number = 0,
-		millisecond: number = 0,
-	)
+    /**
+     * @deprecated use {@link LocalTime.of} instead
+     */
+	constructor(hour: HourNumber | number, minute: MinuteNumber | number, second: SecondNumber | number = 0, millisecond: number = 0)
 	{
 		this.hour = requireValidHourNumber(hour);
 		this.minute = requireValidMinuteNumber(minute);
@@ -45,12 +42,13 @@ export class LocalTime
 		this.millisecond = requireValidMillisecondOfASecondNumber(millisecond);
 	}
 
+    public static of(hour: HourNumber | number, minute: MinuteNumber | number = 0, second: SecondNumber | number = 0, millisecond: number = 0) {
+        return new LocalTime(hour, minute, second, millisecond)
+    }
+
 	public static get MIDNIGHT()
 	{
-		return new LocalTime(
-			0,
-			0,
-		);
+		return midnight
 	}
 
 	public static from(date: Date)
@@ -141,3 +139,5 @@ export class LocalTime
 			))
 	}
 }
+
+export const midnight = LocalTime.of(0, 0)
