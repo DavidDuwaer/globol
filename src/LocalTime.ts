@@ -7,6 +7,7 @@ import {LocalDate} from "./LocalDate.js";
 import {padToTwoDigits} from "./util/padToTwoDigits.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
+import {assertNoEmptyString} from "./assertNoEmptyString";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -59,8 +60,15 @@ export class LocalTime
 		);
 	}
 
-	public static parse(string: string)
+	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
+	public static parse(string: string): LocalTime
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalTime | PreParseResult
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalTime | PreParseResult
 	{
+		if (typeof string !== 'string') {
+			return string
+		}
+		assertNoEmptyString(string, 'LocalTime')
 		const segments = string.split(':');
 		const secondAndMillis = segments?.[2]?.split('.');
 		return new LocalTime(

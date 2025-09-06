@@ -11,6 +11,8 @@ import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber.
 import {ZoneId, ZoneIdString} from "./ZoneId";
 import {ZonedDateTime} from "./ZonedDateTime";
 import {Instant} from "./Instant";
+import {assertNoEmptyString} from "./assertNoEmptyString";
+import {requireValidDate} from "./util/requireValidDate";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -37,8 +39,18 @@ export class LocalDate
 		);
 	}
 
-	public static parse(string: string)
+	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
+	public static parse(string: string): LocalDate
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalDate | PreParseResult
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalDate | PreParseResult
 	{
+		if (typeof string !== 'string') {
+			return string
+		}
+		assertNoEmptyString(string, 'LocalDate')
+		const date = requireValidDate(
+			new Date(string)
+		)
 		const match = /(?<year>-?[0-9]{1,4})-(?<month>[0-9]{1,2})-(?<dayOfMonth>[0-9]{1,2})/
 			.exec(string)
 		if (match === null)

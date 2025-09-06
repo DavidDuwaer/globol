@@ -7,6 +7,7 @@ import {toZoneId} from "./util/toZoneId.js";
 import {DurationSpec} from "./DurationSpec.js";
 import {defaults} from "./defaults.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
+import {assertNoEmptyString} from "./assertNoEmptyString";
 
 export class Instant
 {
@@ -31,12 +32,19 @@ export class Instant
 		return Instant.ofEpochMilli(Date.now());
 	}
 
-	public static parse(stringValue: string)
+	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
+	public static parse(string: string): Instant
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): Instant | PreParseResult
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): Instant | PreParseResult
 	{
+		if (typeof string !== 'string') {
+			return string
+		}
+		assertNoEmptyString(string, 'Instant')
 		const date = requireValidDate(
-			new Date(stringValue)
-		);
-		return Instant.ofEpochMilli(date.getTime());
+			new Date(string)
+		)
+		return Instant.ofEpochMilli(date.getTime())
 	}
 
 	public static from(date: Date)
