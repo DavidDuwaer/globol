@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 import {LocalDateTime} from './LocalDateTime.js';
-import {LocalTime} from './LocalTime.js';
+import {HourNumber, LocalTime, MinuteNumber} from './LocalTime.js';
 import {DayOfWeek} from "./DayOfWeek.js";
 import {IsoWeekDayNumber} from "./IsoWeekDayNumber.js";
 import {requireValidISOWeekDayNumber} from "./util/requireValidISOWeekDayNumber.js";
@@ -8,6 +8,9 @@ import {newValidMoment} from "./util/newValidMoment.js";
 import {requireInt} from "./util/requireInt.js";
 import {requireValidMonthNumber} from "./util/requireValidMonthNumber.js";
 import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber.js";
+import {ZoneId, ZoneIdString} from "./ZoneId";
+import {ZonedDateTime} from "./ZonedDateTime";
+import {Instant} from "./Instant";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -131,6 +134,38 @@ export class LocalDate
 			.diff(other.toMoment(), 'days');
 	}
 
+	public at(hour: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime
+	public at(time: LocalTime): LocalDateTime
+	public at(timeZone: ZoneId | ZoneIdString | string): ZonedDateTime
+	public at(arg1: number | LocalTime | ZoneId | string, arg2: number = 0): LocalDateTime | ZonedDateTime
+	{
+		if (typeof arg1 === 'number') {
+			return LocalDateTime.of(
+				this,
+				LocalTime.of(arg1, arg2)
+			);
+		} else if (arg1 instanceof LocalTime) {
+			return LocalDateTime.of(
+				this,
+				arg1
+			);
+		} else {
+			return this
+				.at(0)
+				.at(arg1);
+		}
+	}
+
+	public toInstant(timeZone: ZoneId | ZoneIdString | string): Instant
+	{
+		return this
+			.at(timeZone)
+			.toInstant();
+	}
+
+	/**
+	 * @deprecated Use {@link at} instead
+	 */
 	public atTime(localTime: LocalTime): LocalDateTime
 	{
 		return LocalDateTime.of(

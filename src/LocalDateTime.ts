@@ -34,19 +34,27 @@ export class LocalDateTime
 			.atZone(ZoneId.browser());
 	}
 
-	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
-	public atZone(zoneId: ZoneId): ZonedDateTime
-	public atZone(arg: ZoneId | ZoneIdString): ZonedDateTime
+	public at(timeZone: ZoneId | ZoneIdString | string): ZonedDateTime
 	{
-		const zoneId = toZoneId(arg);
+		const zoneId = toZoneId(timeZone);
 		const zonedMoment = this.toZonedMoment(zoneId);
 		return new ZonedDateTime(zonedMoment.toDate(), zoneId);
 	}
 
-	public toInstant(zoneId: ZoneId): Instant
+	/**
+	 * @deprecated Use {@link at} instead
+	 */
+	public atZone(timeZone: ZoneId | ZoneIdString): ZonedDateTime
+	{
+		const zoneId = toZoneId(timeZone);
+		const zonedMoment = this.toZonedMoment(zoneId);
+		return new ZonedDateTime(zonedMoment.toDate(), zoneId);
+	}
+
+	public toInstant(timeZone: ZoneId | ZoneIdString | string): Instant
 	{
 		return this
-			.atZone(zoneId)
+			.at(timeZone)
 			.toInstant();
 	}
 
