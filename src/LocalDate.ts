@@ -11,7 +11,6 @@ import {requireValidDayOfMonthNumber} from "./util/requireValidDayOfMonthNumber.
 import {ZoneId, ZoneIdString} from "./ZoneId";
 import {ZonedDateTime} from "./ZonedDateTime";
 import {Instant} from "./Instant";
-import {assertNoEmptyString} from "./assertNoEmptyString";
 import {requireValidDate} from "./util/requireValidDate";
 import {handleParseEdgeCases} from "./handleParseEdgeCases";
 
@@ -104,6 +103,24 @@ export class LocalDate
 	{
 		return this.toMoment()
 			.format('YYYY-MM-DD');
+	}
+
+	/**
+	 * Will return a positive integer if this {@link LocalDate} is after the {@link LocalDate}
+	 * given as argument, negative if before, and 0 if both {@link LocalDate}s are at exactly the same time
+	 * (millisecond precision);
+	 */
+	public compareTo(other: LocalDate): number {
+		if (this.year !== other.year) {
+			return this.year - other.year
+		}
+		if (this.month !== other.month) {
+			return this.month - other.month
+		}
+		if (this.dayOfMonth !== other.dayOfMonth) {
+			return this.dayOfMonth - other.dayOfMonth
+		}
+		return 0
 	}
 
 	public equals(localDate: LocalDate | null | undefined): boolean
