@@ -7,7 +7,7 @@ import {toZoneId} from "./util/toZoneId.js";
 import {DurationSpec} from "./DurationSpec.js";
 import {defaults} from "./defaults.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
-import {assertNoEmptyString} from "./assertNoEmptyString";
+import {handleParseEdgeCases} from "./handleParseEdgeCases";
 
 export class Instant
 {
@@ -33,18 +33,18 @@ export class Instant
 	}
 
 	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
-	public static parse(string: string): Instant
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): Instant | PreParseResult
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): Instant | PreParseResult
+	public static parse(string: string, failSilently?: false): Instant
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: false): Instant | PreParseResult
+	public static parse(string: string, failSilently?: boolean): Instant | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: boolean): Instant | PreParseResult | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently = false): Instant | PreParseResult | undefined
 	{
-		if (typeof string !== 'string') {
-			return string
-		}
-		assertNoEmptyString(string, 'Instant')
-		const date = requireValidDate(
-			new Date(string)
-		)
-		return Instant.ofEpochMilli(date.getTime())
+		return handleParseEdgeCases(string, failSilently, 'Instant', string => {
+			const date = requireValidDate(
+				new Date(string)
+			)
+			return Instant.ofEpochMilli(date.getTime())
+		})
 	}
 
 	public static from(date: Date)
@@ -203,6 +203,15 @@ export class Instant
 	}
 
 	/**
+	 * Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z, rounded down (the milliseconds in the
+	 * last second truncated). This returns an integer.
+	 */
+	public toEpochSec(): number
+	{
+		return this.secondsSinceEpoch;
+	}
+
+	/**
 	 * Gets the number of milliseconds from the Java epoch of 1970-01-01T00:00:00Z. Microseconds, if present, are
 	 * rounded down, so this method returns an integer.
 	 */
@@ -244,7 +253,7 @@ export class Instant
 
 	/**
 	 * Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z, rounded down (the milliseconds in the
-	 * last second truncated). This returns an integer.
+	 * last second truncated). This returns an integer. Alias of {@link toEpochSec}.
 	 */
 	public getEpochSecond(): number
 	{

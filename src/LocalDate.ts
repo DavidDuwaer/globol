@@ -13,6 +13,7 @@ import {ZonedDateTime} from "./ZonedDateTime";
 import {Instant} from "./Instant";
 import {assertNoEmptyString} from "./assertNoEmptyString";
 import {requireValidDate} from "./util/requireValidDate";
+import {handleParseEdgeCases} from "./handleParseEdgeCases";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
@@ -40,26 +41,24 @@ export class LocalDate
 	}
 
 	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
-	public static parse(string: string): LocalDate
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalDate | PreParseResult
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalDate | PreParseResult
+	public static parse(string: string, failSilently?: false): LocalDate
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: false): LocalDate | PreParseResult
+	public static parse(string: string, failSilently?: boolean): LocalDate | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: boolean): LocalDate | PreParseResult | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently = false): LocalDate | PreParseResult | undefined
 	{
-		if (typeof string !== 'string') {
-			return string
-		}
-		assertNoEmptyString(string, 'LocalDate')
-		const date = requireValidDate(
-			new Date(string)
-		)
-		const match = /(?<year>-?[0-9]{1,4})-(?<month>[0-9]{1,2})-(?<dayOfMonth>[0-9]{1,2})/
-			.exec(string)
-		if (match === null)
-			throw new Error(`Could not parse '${string}' as a LocalDate`);
-		return new LocalDate(
-			requireInt(parseFloat(match.groups!['year']!)),
-			requireInt(parseFloat(match.groups!['month']!)) as MonthNumber,
-			requireInt(parseFloat(match.groups!['dayOfMonth']!)) as DayOfMonthNumber
-		);
+		return handleParseEdgeCases(string, failSilently, 'LocalDate', string => {
+			const date = requireValidDate(new Date(string))
+			const match = /(?<year>-?[0-9]{1,4})-(?<month>[0-9]{1,2})-(?<dayOfMonth>[0-9]{1,2})/
+				.exec(string)
+			if (match === null)
+				throw new Error(`Could not parse '${string}' as a LocalDate`);
+			return new LocalDate(
+				requireInt(parseFloat(match.groups!['year']!)),
+				requireInt(parseFloat(match.groups!['month']!)) as MonthNumber,
+				requireInt(parseFloat(match.groups!['dayOfMonth']!)) as DayOfMonthNumber
+			);
+		})
 	}
 
 	/**

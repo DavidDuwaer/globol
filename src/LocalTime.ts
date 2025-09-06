@@ -7,7 +7,7 @@ import {LocalDate} from "./LocalDate.js";
 import {padToTwoDigits} from "./util/padToTwoDigits.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
-import {assertNoEmptyString} from "./assertNoEmptyString";
+import {handleParseEdgeCases} from "./handleParseEdgeCases";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -61,22 +61,22 @@ export class LocalTime
 	}
 
 	public static parse<PreParseResult extends null | undefined>(string: PreParseResult): PreParseResult
-	public static parse(string: string): LocalTime
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalTime | PreParseResult
-	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult): LocalTime | PreParseResult
+	public static parse(string: string, failSilently?: false): LocalTime
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: false): LocalTime | PreParseResult
+	public static parse(string: string, failSilently?: boolean): LocalTime | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently?: boolean): LocalTime | PreParseResult | undefined
+	public static parse<PreParseResult extends null | undefined>(string: string | PreParseResult, failSilently = false): LocalTime | PreParseResult | undefined
 	{
-		if (typeof string !== 'string') {
-			return string
-		}
-		assertNoEmptyString(string, 'LocalTime')
-		const segments = string.split(':');
-		const secondAndMillis = segments?.[2]?.split('.');
-		return new LocalTime(
-			parseInt(segments[0]) as HourNumber,
-			parseInt(segments[1]) as MinuteNumber,
-			secondAndMillis !== undefined && secondAndMillis[0] !== undefined ? parseInt(secondAndMillis[0]) : undefined,
-			secondAndMillis !== undefined && secondAndMillis[1] !== undefined ? parseInt(secondAndMillis[1]) : undefined
-		);
+		return handleParseEdgeCases(string, failSilently, 'LocalTime', string => {
+			const segments = string.split(':');
+			const secondAndMillis = segments?.[2]?.split('.');
+			return new LocalTime(
+				parseInt(segments[0]) as HourNumber,
+				parseInt(segments[1]) as MinuteNumber,
+				secondAndMillis !== undefined && secondAndMillis[0] !== undefined ? parseInt(secondAndMillis[0]) : undefined,
+				secondAndMillis !== undefined && secondAndMillis[1] !== undefined ? parseInt(secondAndMillis[1]) : undefined
+			)
+		})
 	}
 
 	public atDate(date: LocalDate): LocalDateTime
