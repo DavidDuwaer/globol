@@ -1,6 +1,6 @@
 {
   "name": "globol",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "commonjs",
   "description": "Javascript/Typescript date/time as it should be: immutable, fluent, multi-zone, intuitive. Inspired by the masterful java.time library which suddenly made dates easy.",
   "keywords": [
