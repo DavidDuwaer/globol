@@ -23,11 +23,22 @@ export class LocalDate
 	public readonly month: MonthNumber
 	public readonly dayOfMonth: DayOfMonthNumber
 
-	constructor(year: number, month: MonthNumber, dayOfMonth: DayOfMonthNumber)
+	/**
+	 * @deprecated Use {@link of} instead
+	 */
+	constructor(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number)
 	{
 		this.year = requireInt(year);
 		this.month = requireValidMonthNumber(month);
 		this.dayOfMonth = requireValidDayOfMonthNumber(dayOfMonth);
+	}
+
+	public static of(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number): LocalDate {
+		return new LocalDate(
+			year,
+			month,
+			dayOfMonth
+		)
 	}
 
 	public static from(date: Date): LocalDate

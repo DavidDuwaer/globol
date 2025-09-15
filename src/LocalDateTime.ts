@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import {Instant} from './Instant.js';
-import {LocalDate} from './LocalDate.js';
-import {LocalTime} from './LocalTime.js';
+import {DayOfMonthNumber, LocalDate, MonthNumber} from './LocalDate.js';
+import {HourNumber, LocalTime, midnight, MinuteNumber} from './LocalTime.js';
 import {ZoneId, ZoneIdString} from './ZoneId.js';
 import {ZonedDateTime} from "./ZonedDateTime.js";
 import {DayOfWeek} from "./DayOfWeek.js";
@@ -23,9 +23,18 @@ export class LocalDateTime
 		this.time = time;
 	}
 
-	public static of(date: LocalDate, time: LocalTime)
+	public static of(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number, hour?: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime
+	public static of(date: LocalDate, time?: LocalTime): LocalDateTime
+	public static of(arg1: LocalDate | number, arg2?: LocalTime | number, dayOfMonth?: DayOfMonthNumber | number, hour?: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime
 	{
-		return new LocalDateTime(date, time);
+		if (arg1 instanceof LocalDate) {
+			return new LocalDateTime(arg1, (arg2 as LocalTime | undefined) ?? midnight);
+		} else {
+			return new LocalDateTime(
+				LocalDate.of(arg1, arg2 as number, dayOfMonth!),
+				LocalTime.of(hour!, minute),
+			)
+		}
 	}
 
 	public static browser()

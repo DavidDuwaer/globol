@@ -8,6 +8,8 @@ import {DurationSpec} from "./DurationSpec.js";
 import {defaults} from "./defaults.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {handleParseEdgeCases} from "./handleParseEdgeCases";
+import {DayOfMonthNumber, LocalDate, MonthNumber} from "./LocalDate";
+import {HourNumber, LocalTime, midnight, MinuteNumber} from "./LocalTime";
 
 export class Instant
 {
@@ -27,8 +29,23 @@ export class Instant
 		);
 	}
 
-	public static now()
-	{
+	public static of(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number, timeZone: ZoneId | ZoneIdString | string, hour?: HourNumber | number, minute?: MinuteNumber | number): Instant
+	public static of(date: LocalDate, timeZone: ZoneId | ZoneIdString | string, time?: LocalTime): Instant
+	public static of(jsDate: Date, timeZone: ZoneId | ZoneIdString | string): Instant
+	public static of(arg1: Date | LocalDate | number, arg2?: ZoneId | string | number, arg3?: LocalTime | number, timeZone?: ZoneId | string, hour?: number, minute?: number): Instant {
+		const zonedDateTime = (() => {
+			if (arg1 instanceof Date) {
+				return ZonedDateTime.of(arg1, toZoneId(arg2 as ZoneId | string))
+			} else if (arg1 instanceof LocalDate) {
+				return ZonedDateTime.of(arg1, arg2 as ZoneId | string, (arg3 as LocalTime | undefined) ?? midnight)
+			} else {
+				return ZonedDateTime.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber, toZoneId(timeZone!), hour ?? 0, minute ?? 0)
+			}
+		})()
+		return zonedDateTime.toInstant()
+	}
+
+	public static now() {
 		return Instant.ofEpochMilli(Date.now());
 	}
 

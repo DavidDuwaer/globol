@@ -2,17 +2,21 @@ import moment from 'moment-timezone';
 import {Instant} from './Instant.js';
 import {DayOfMonthNumber, LocalDate, MonthNumber} from './LocalDate.js';
 import {LocalDateTime} from './LocalDateTime.js';
-import {HourNumber, LocalTime, MinuteNumber} from './LocalTime.js';
+import {HourNumber, LocalTime, midnight, MinuteNumber} from './LocalTime.js';
 import {ZoneId, ZoneIdString} from './ZoneId.js';
 import {requireValidMoment} from "./util/requireValidMoment.js";
 import {requireValidDate} from "./util/requireValidDate.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
+import {toZoneId} from "./util/toZoneId";
 
 export class ZonedDateTime
 {
 	private readonly zonedMoment: moment.Moment
 
+	/**
+	 * @deprecated Use {@link of} instead
+	 */
 	constructor(jsDate: Date, zoneId: ZoneId)
 	{
 		const validJsDate = requireValidDate(jsDate);
@@ -23,6 +27,23 @@ export class ZonedDateTime
 			),
 			`Failed to get valid Moment from JS Date object ${validJsDate.toISOString()} and Zone ID ${zoneId}`
 		);
+	}
+
+	public static of(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number, timeZone: ZoneId | ZoneIdString | string, hour?: HourNumber | number, minute?: MinuteNumber | number): ZonedDateTime
+	public static of(date: LocalDate, timeZone: ZoneId | ZoneIdString | string, time?: LocalTime): ZonedDateTime
+	public static of(jsDate: Date, timeZone: ZoneId | ZoneIdString | string): ZonedDateTime
+	public static of(arg1: Date | LocalDate | number, arg2?: ZoneId | string | number, arg3?: LocalTime | number, timeZone?: ZoneId | string, hour?: number, minute?: number): ZonedDateTime {
+		if (arg1 instanceof Date) {
+			return new ZonedDateTime(arg1, toZoneId(arg2 as ZoneId | string));
+		} else if (arg1 instanceof LocalDate) {
+			return arg1
+				.at((arg3 as LocalTime | undefined) ?? midnight)
+				.at(arg2 as ZoneId | string)
+		} else {
+			return LocalDate.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber)
+				.at(hour ?? 0, minute ?? 0)
+				.at(toZoneId(timeZone!))
+		}
 	}
 
 	public static now()

@@ -3,7 +3,7 @@ import {requireValidMinuteNumber} from "./util/requireValidMinuteNumber.js";
 import {requireValidSecondNumber} from "./util/requireValidSecondNumber.js";
 import {requireValidMillisecondOfASecondNumber} from "./util/requireValidMillisecondOfASecondNumber.js";
 import {LocalDateTime} from "./LocalDateTime.js";
-import {LocalDate} from "./LocalDate.js";
+import {DayOfMonthNumber, LocalDate, MonthNumber} from "./LocalDate.js";
 import {padToTwoDigits} from "./util/padToTwoDigits.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
@@ -79,6 +79,20 @@ export class LocalTime
 		})
 	}
 
+	public at(year: number, month: MonthNumber | number, day: DayOfMonthNumber | number): LocalDateTime
+	public at(date: LocalDate): LocalDateTime
+	public at(arg1: LocalDate | number, arg2?: MonthNumber | number, arg3?: DayOfMonthNumber | number): LocalDateTime {
+		return LocalDateTime.of(
+			arg1 instanceof LocalDate
+				? arg1
+				: LocalDate.of(arg1, arg2!, arg3!),
+			this
+		)
+	}
+
+	/**
+	 * @deprecated use {@link .at} instead
+	 */
 	public atDate(date: LocalDate): LocalDateTime
 	{
 		return LocalDateTime.of(
