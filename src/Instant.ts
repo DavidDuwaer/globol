@@ -203,9 +203,19 @@ export class Instant
 		return this.compareTo(otherInstant) > 0;
 	}
 
+	public isOnOrAfter(otherInstant: Instant): boolean
+	{
+		return this.compareTo(otherInstant) >= 0;
+	}
+
 	public isBefore(otherInstant: Instant): boolean
 	{
 		return this.compareTo(otherInstant) < 0;
+	}
+
+	public isOnOrBefore(otherInstant: Instant): boolean
+	{
+		return this.compareTo(otherInstant) <= 0;
 	}
 
 	/**
