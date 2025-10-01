@@ -36,6 +36,7 @@
     "pretest": "npm run build",
     "build-dev": "npm run clear && tsc --sourceMap",
     "test": "npm run build && nyc mocha --require ts-node/register tests/**/*.test.ts",
+    "typecheck": "tsc --noEmit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "prepublishOnly": "npm install && npm run build && npm run test"
   },
