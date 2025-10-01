@@ -278,6 +278,11 @@ export class Instant
 		}
 	}
 
+    [Symbol.toPrimitive](hint: string) {
+        if (hint === "string") return toString()
+        return null
+    }
+
 	/**
 	 * Gets the number of seconds from the Java epoch of 1970-01-01T00:00:00Z, rounded down (the milliseconds in the
 	 * last second truncated). This returns an integer. Alias of {@link toEpochSec}.
