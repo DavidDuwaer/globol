@@ -100,10 +100,10 @@ export class Instant
 		return this.plus(duration);
 	}
 
-	public atZone(zoneIdString: ZoneIdString): ZonedDateTime
+	public atZone(zoneIdString: ZoneIdString | string): ZonedDateTime
 	public atZone(zoneId: ZoneId): ZonedDateTime
-	public atZone(timeZone: ZoneId | ZoneIdString): ZonedDateTime
-	public atZone(arg: ZoneId | ZoneIdString): ZonedDateTime
+    public atZone(timeZone: ZoneId | ZoneIdString | string): ZonedDateTime
+	public atZone(arg: ZoneId | ZoneIdString | string): ZonedDateTime
 	{
 		return new ZonedDateTime(this.toJS(), toZoneId(arg));
 	}
