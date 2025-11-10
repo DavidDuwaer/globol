@@ -10,8 +10,7 @@ import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
 import {toZoneId} from "./util/toZoneId";
 
-export class ZonedDateTime
-{
+export class ZonedDateTime {
 	private readonly zonedMoment: moment.Moment
 
 	/**
@@ -34,15 +33,15 @@ export class ZonedDateTime
 	public static of(jsDate: Date, timeZone: ZoneId | ZoneIdString | string): ZonedDateTime
 	public static of(arg1: Date | LocalDate | number, arg2?: ZoneId | string | number, arg3?: LocalTime | number, timeZone?: ZoneId | string, hour?: number, minute?: number): ZonedDateTime {
 		if (arg1 instanceof Date) {
-			return new ZonedDateTime(arg1, toZoneId(arg2 as ZoneId | string));
-		} else if (arg1 instanceof LocalDate) {
-			return arg1
-				.at((arg3 as LocalTime | undefined) ?? midnight)
-				.at(arg2 as ZoneId | string)
+			return new ZonedDateTime(arg1, toZoneId(arg2 as ZoneId | string))
+		} else if (LocalDate.isInstance(arg1)) {
+            return arg1
+                .at((arg3 as LocalTime | undefined) ?? midnight)
+                .at(arg2 as ZoneId | string)
 		} else {
-			return LocalDate.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber)
-				.at(hour ?? 0, minute ?? 0)
-				.at(toZoneId(timeZone!))
+            return LocalDate.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber)
+                .at(hour ?? 0, minute ?? 0)
+                .at(toZoneId(timeZone!))
 		}
 	}
 

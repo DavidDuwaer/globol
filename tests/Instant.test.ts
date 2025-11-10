@@ -114,16 +114,45 @@ describe('now() function', () => {
     })
 });
 
+describe('.atZone() method', () => {
+    const validInputs = [
+        ZoneId.browser(),
+        ZoneId.of('UTC'),
+        ZoneId.of('Europe/Amsterdam'),
+        'UTC',
+        'Europe/Amsterdam',
+        'America/New_York'
+    ];
+
+    validInputs.forEach(input => {
+        it(`should accept ${input}`, () => {
+            const currentTime = Instant.now();
+            const zonedTime = currentTime.atZone(input as any);
+            assert.isNotNull(zonedTime);
+        });
+    });
+
+    it('should give user-friendly error when function is passed instead of calling it', () => {
+        const currentTime = Instant.now();
+        try {
+            currentTime.atZone(ZoneId.browser as any);
+            assert.fail('Expected an error to be thrown');
+        } catch (error: any) {
+            console.log('Error message:', error.message);
+            assert.match(error.message, /Expected valid ZoneIdString, got.*/i);
+        }
+    });
+});
+
 function testAddition(
     start: Instant,
     duration: Duration | DurationSpec,
-)
-{
-    const end = start.add(duration);
-    const asDuration = (duration instanceof Duration ? duration : Duration.of(duration));
+) {
+    const end = start.add(duration)
+    const asDuration = Duration.isInstance(duration) ? duration : Duration.of(duration)
     assert.equal(
         asDuration.asMillis,
         end.toJS().getTime() - start.toJS().getTime(),
         `End time ${end.toJS()} not ${asDuration.asMillis}ms after start time ${start.toJS()}`
-    );
+    )
 }

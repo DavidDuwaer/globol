@@ -10,12 +10,15 @@ import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {handleParseEdgeCases} from "./handleParseEdgeCases";
 import {DayOfMonthNumber, LocalDate, MonthNumber} from "./LocalDate";
 import {HourNumber, LocalTime, midnight, MinuteNumber} from "./LocalTime";
+import {LIB_ID} from "./util/LIB_ID";
 
-export class Instant
-{
-	public static readonly EPOCH = new Instant(0, 0);
-	private readonly secondsSinceEpoch: number;
-	private readonly microsInSecond: number;
+const BRAND = Symbol.for(`${LIB_ID}_Instant`)
+
+export class Instant {
+	public static readonly EPOCH = new Instant(0, 0)
+	private readonly secondsSinceEpoch: number
+	private readonly microsInSecond: number
+    private [BRAND] = true
 
 	private constructor(secondsSinceEpoch: number, microsInSecond: number)
 	{
@@ -36,10 +39,10 @@ export class Instant
 		const zonedDateTime = (() => {
 			if (arg1 instanceof Date) {
 				return ZonedDateTime.of(arg1, toZoneId(arg2 as ZoneId | string))
-			} else if (arg1 instanceof LocalDate) {
-				return ZonedDateTime.of(arg1, arg2 as ZoneId | string, (arg3 as LocalTime | undefined) ?? midnight)
+			} else if (LocalDate.isInstance(arg1)) {
+                return ZonedDateTime.of(arg1, arg2 as ZoneId | string, (arg3 as LocalTime | undefined) ?? midnight)
 			} else {
-				return ZonedDateTime.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber, toZoneId(timeZone!), hour ?? 0, minute ?? 0)
+                return ZonedDateTime.of(arg1, arg2 as MonthNumber, arg3 as DayOfMonthNumber, toZoneId(timeZone!), hour ?? 0, minute ?? 0)
 			}
 		})()
 		return zonedDateTime.toInstant()
@@ -110,12 +113,11 @@ export class Instant
 
 	public plus(duration: DurationSpec): Instant
 	public plus(duration: Duration): Instant
-	public plus(duration: Duration | DurationSpec): Instant
-	{
-		const asDuration = duration instanceof Duration
+	public plus(duration: Duration | DurationSpec): Instant {
+		const asDuration = Duration.isInstance(duration)
 			? duration
-			: Duration.of(duration);
-		return Instant.ofEpochMilli(this.toEpochMilli() + asDuration.asMillis);
+			: Duration.of(duration)
+		return Instant.ofEpochMilli(this.toEpochMilli() + asDuration.asMillis)
 	}
 
 	public plusSeconds(secondsToAdd: number)
@@ -154,17 +156,16 @@ export class Instant
 	public minus(duration: DurationSpec): Instant
 	public minus(duration: Duration): Instant
 	public minus(duration: Duration | DurationSpec | Instant): Instant | Duration
-	public minus(other: Duration | DurationSpec | Instant): Instant | Duration
-	{
-		if (other instanceof Instant) {
+	public minus(other: Duration | DurationSpec | Instant): Instant | Duration {
+		if (Instant.isInstance(other)) {
 			return Duration.ofMilliseconds(
 				this.toEpochMilli() - other.toEpochMilli()
-			);
+			)
 		} else {
-			const asDuration = other instanceof Duration
+			const asDuration = Duration.isInstance(other)
 				? other
-				: Duration.of(other);
-			return Instant.ofEpochMilli(this.toEpochMilli() - asDuration.asMillis);
+				: Duration.of(other)
+			return Instant.ofEpochMilli(this.toEpochMilli() - asDuration.asMillis)
 		}
 	}
 
@@ -293,6 +294,10 @@ export class Instant
 			new Date(this.toEpochMilli())
 		);
 	}
+
+    public static isInstance(value: any): value is Instant {
+        return value?.[BRAND]
+    }
 }
 
 export const now = Instant.now;

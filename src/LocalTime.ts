@@ -8,6 +8,7 @@ import {padToTwoDigits} from "./util/padToTwoDigits.js";
 import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
 import {defaults} from "./defaults.js";
 import {handleParseEdgeCases} from "./handleParseEdgeCases";
+import {LIB_ID} from "./util/LIB_ID";
 
 export type HourNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19
@@ -25,12 +26,14 @@ export type SecondNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	| 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49
 	| 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59;
 
-export class LocalTime
-{
-	public readonly hour: HourNumber;
-	public readonly minute: MinuteNumber;
-	public readonly second: SecondNumber;
-	public readonly millisecond: number;
+const BRAND = Symbol.for(`${LIB_ID}_LocalTime`)
+
+export class LocalTime {
+	public readonly hour: HourNumber
+	public readonly minute: MinuteNumber
+	public readonly second: SecondNumber
+	public readonly millisecond: number
+    private [BRAND] = true
 
     /**
      * @deprecated use {@link LocalTime.of} instead
@@ -83,7 +86,7 @@ export class LocalTime
 	public at(date: LocalDate): LocalDateTime
 	public at(arg1: LocalDate | number, arg2?: MonthNumber | number, arg3?: DayOfMonthNumber | number): LocalDateTime {
 		return LocalDateTime.of(
-			arg1 instanceof LocalDate
+			LocalDate.isInstance(arg1)
 				? arg1
 				: LocalDate.of(arg1, arg2!, arg3!),
 			this
@@ -160,6 +163,10 @@ export class LocalTime
 				))
 			))
 	}
+
+    public static isInstance(value: any): value is LocalTime {
+        return value?.[BRAND]
+    }
 }
 
 export const midnight = LocalTime.of(0, 0)

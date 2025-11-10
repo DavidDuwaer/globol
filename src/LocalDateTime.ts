@@ -25,15 +25,14 @@ export class LocalDateTime
 
 	public static of(year: number, month: MonthNumber | number, dayOfMonth: DayOfMonthNumber | number, hour?: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime
 	public static of(date: LocalDate, time?: LocalTime): LocalDateTime
-	public static of(arg1: LocalDate | number, arg2?: LocalTime | number, dayOfMonth?: DayOfMonthNumber | number, hour?: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime
-	{
-		if (arg1 instanceof LocalDate) {
-			return new LocalDateTime(arg1, (arg2 as LocalTime | undefined) ?? midnight);
+	public static of(arg1: LocalDate | number, arg2?: LocalTime | number, dayOfMonth?: DayOfMonthNumber | number, hour?: HourNumber | number, minute?: MinuteNumber | number): LocalDateTime {
+		if (LocalDate.isInstance(arg1)) {
+            return new LocalDateTime(arg1, (arg2 as LocalTime | undefined) ?? midnight);
 		} else {
-			return new LocalDateTime(
-				LocalDate.of(arg1, arg2 as number, dayOfMonth!),
-				LocalTime.of(hour!, minute),
-			)
+            return new LocalDateTime(
+                LocalDate.of(arg1, arg2 as number, dayOfMonth!),
+                LocalTime.of(hour!, minute),
+            )
 		}
 	}
 

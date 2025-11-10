@@ -4,10 +4,13 @@ import {DurationSpec} from "./DurationSpec.js";
 import {requireInt} from "./util/requireInt.js";
 import {padToThreeDigits} from "./util/padToThreeDigits.js";
 import {padToTwoDigits} from "./util/padToTwoDigits.js";
+import {LIB_ID} from "./util/LIB_ID";
 
-export class Duration
-{
-    private readonly momentDuration: MomentDuration;
+const BRAND = Symbol.for(`${LIB_ID}_Duration`)
+
+export class Duration {
+    private readonly momentDuration: MomentDuration
+    private [BRAND] = true
 
     private constructor(momentDuration: MomentDuration)
     {
@@ -253,5 +256,9 @@ export class Duration
             .replace('D', `${this.days}`)
             .replace('Y', `${this.years}`)
             .replace(literalRegex, literals.splice(0, 1)[0]!)
+    }
+
+    public static isInstance(value: any): value is Duration {
+        return value?.[BRAND]
     }
 }

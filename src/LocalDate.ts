@@ -13,15 +13,18 @@ import {ZonedDateTime} from "./ZonedDateTime";
 import {Instant} from "./Instant";
 import {requireValidDate} from "./util/requireValidDate";
 import {handleParseEdgeCases} from "./handleParseEdgeCases";
+import {LIB_ID} from "./util/LIB_ID";
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
 
-export class LocalDate
-{
+const BRAND = Symbol.for(`${LIB_ID}_LocalDate`)
+
+export class LocalDate {
 	public readonly year: number
 	public readonly month: MonthNumber
 	public readonly dayOfMonth: DayOfMonthNumber
+    private [BRAND] = true
 
 	/**
 	 * @deprecated Use {@link of} instead
@@ -183,7 +186,7 @@ export class LocalDate
 				this,
 				LocalTime.of(arg1, arg2)
 			);
-		} else if (arg1 instanceof LocalTime) {
+		} else if (LocalTime.isInstance(arg1)) {
 			return LocalDateTime.of(
 				this,
 				arg1
@@ -258,8 +261,11 @@ export class LocalDate
 		);
 	}
 
-	private get debugDescription()
-	{
+	private get debugDescription() {
 		return `{"year":${this.year},"month":${this.month},"day":${this.dayOfMonth}}`;
 	}
+
+    public static isInstance(value: any): value is LocalDate {
+        return value?.[BRAND]
+    }
 }

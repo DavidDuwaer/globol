@@ -1,12 +1,15 @@
 import moment from 'moment-timezone';
 import {requireValidZoneIdString} from "./util/requireValidZoneIdString.js";
 import {TimeZone} from './TimeZone.js';
+import {LIB_ID} from './util/LIB_ID';
 
 export type ZoneIdString = 'Europe/Amsterdam' | 'UTC' | 'America/New_York'; // todo: add all other IDs that occur in tz database
 
-export class ZoneId extends TimeZone
-{
-	private readonly zoneId: ZoneIdString;
+const BRAND = Symbol.for(`${LIB_ID}_ZoneId`)
+
+export class ZoneId extends TimeZone {
+	private readonly zoneId: ZoneIdString
+    private [BRAND] = true
 
 	private constructor(zoneId: ZoneIdString)
 	{
@@ -48,13 +51,15 @@ export class ZoneId extends TimeZone
 			: tail.every(element => element?.equals(zoneId1));
 	}
 
-	public equals(zoneId: ZoneId | null | undefined)
-	{
-		return this.zoneId === zoneId?.zoneId;
+	public equals(zoneId: ZoneId | null | undefined) {
+		return this.zoneId === zoneId?.zoneId
 	}
 
-	public toString()
-	{
-		return this.zoneId;
+	public toString() {
+		return this.zoneId
 	}
+
+    public static isInstance(value: any): value is ZoneId {
+        return value?.[BRAND]
+    }
 }
