@@ -1,6 +1,6 @@
-import {ISOSerializationOptions} from "./util/ISOSerializationOptions.js";
+import {ISOSerializationOptions} from './util/ISOSerializationOptions.js'
 
 
 type Defaults = ISOSerializationOptions;
 
-export const defaults: Defaults = {};
+export const defaults: Defaults = {}

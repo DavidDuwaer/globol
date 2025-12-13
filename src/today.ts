@@ -1,6 +1,6 @@
-import {now} from "./Instant";
-import {LocalDate} from "./LocalDate";
-import {ZoneId, ZoneIdString} from "./ZoneId";
+import {now} from './Instant'
+import {LocalDate} from './LocalDate'
+import {ZoneId, ZoneIdString} from './ZoneId'
 
 /**
  * @param timeZone Override the timezone. Default is browser's time zone.

@@ -1,4 +1,4 @@
-import {DayOfWeek} from "./DayOfWeek";
+import {DayOfWeek} from './DayOfWeek'
 
 export {DayOfWeek} from './DayOfWeek.js'
 export {DayOfWeekId} from './DayOfWeekId.js'
