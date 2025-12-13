@@ -2,7 +2,7 @@ import {DayOfWeek} from './DayOfWeek'
 
 export {DayOfWeek} from './DayOfWeek.js'
 export {DayOfWeekId} from './DayOfWeekId.js'
-export {Duration} from './Duration.js'
+export {Duration, millis, milliseconds, seconds, minutes, hours, days, years} from './Duration.js'
 export {Instant, now, now as getNow} from './Instant.js'
 export {IsoWeekDayNumber} from './IsoWeekDayNumber.js'
 export {LocalDate, MonthNumber, DayOfMonthNumber} from './LocalDate.js'

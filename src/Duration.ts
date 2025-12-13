@@ -238,3 +238,11 @@ export class Duration {
     return value?.[BRAND]
   }
 }
+
+export const millis = Duration.ofMilliseconds
+export const milliseconds = Duration.ofMilliseconds
+export const seconds = Duration.ofSeconds
+export const minutes = Duration.ofMinutes
+export const hours = Duration.ofHours
+export const days = Duration.ofDays
+export const years = Duration.ofYears
