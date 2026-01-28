@@ -60,27 +60,63 @@ export class Duration {
     )
   }
 
-  public static ofYears(years: number) {
+  public static ofYears<T extends null | undefined>(years: T): T
+  public static ofYears(years: number): Duration
+  public static ofYears<T extends null | undefined>(years: number | T): Duration | T
+  public static ofYears<T extends null | undefined>(years: number | T): Duration | T {
+    if (years == null) {
+      return years
+    }
     return Duration.parse(`P${years}Y`)
   }
 
-  public static ofDays(days: number) {
+  public static ofDays<T extends null | undefined>(days: T): T
+  public static ofDays(days: number): Duration
+  public static ofDays<T extends null | undefined>(days: number | T): Duration | T
+  public static ofDays<T extends null | undefined>(days: number | T): Duration | T {
+    if (days == null) {
+      return days
+    }
     return Duration.parse(`P${days}D`)
   }
 
-  public static ofHours(hours: number) {
+  public static ofHours<T extends null | undefined>(hours: T): T
+  public static ofHours(hours: number): Duration
+  public static ofHours<T extends null | undefined>(hours: number | T): Duration | T
+  public static ofHours<T extends null | undefined>(hours: number | T): Duration | T {
+    if (hours == null) {
+      return hours
+    }
     return Duration.parse(`PT${hours}H`)
   }
 
-  public static ofMinutes(minutes: number) {
+  public static ofMinutes<T extends null | undefined>(minutes: T): T
+  public static ofMinutes(minutes: number): Duration
+  public static ofMinutes<T extends null | undefined>(minutes: number | T): Duration | T
+  public static ofMinutes<T extends null | undefined>(minutes: number | T): Duration | T {
+    if (minutes == null) {
+      return minutes
+    }
     return Duration.parse(`PT${minutes}M`)
   }
 
-  public static ofSeconds(seconds: number) {
+  public static ofSeconds<T extends null | undefined>(seconds: T): T
+  public static ofSeconds(seconds: number): Duration
+  public static ofSeconds<T extends null | undefined>(seconds: number | T): Duration | T
+  public static ofSeconds<T extends null | undefined>(seconds: number | T): Duration | T {
+    if (seconds == null) {
+      return seconds
+    }
     return Duration.parse(`PT${seconds}S`)
   }
 
-  public static ofMilliseconds(milliseconds: number) {
+  public static ofMilliseconds<T extends null | undefined>(milliseconds: T): T
+  public static ofMilliseconds(milliseconds: number): Duration
+  public static ofMilliseconds<T extends null | undefined>(milliseconds: number | T): Duration | T
+  public static ofMilliseconds<T extends null | undefined>(milliseconds: number | T): Duration | T {
+    if (milliseconds == null) {
+      return milliseconds
+    }
     return Duration.parse(`PT${milliseconds / 1000}S`)
   }
 
