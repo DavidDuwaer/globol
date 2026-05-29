@@ -14,6 +14,7 @@ import {Instant} from './Instant'
 import {requireValidDate} from './util/requireValidDate'
 import {handleParseEdgeCases} from './handleParseEdgeCases'
 import {LIB_ID} from './util/LIB_ID'
+import {Duration} from './Duration'
 
 export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type DayOfMonthNumber =
@@ -236,11 +237,14 @@ export class LocalDate {
     )
   }
 
-  plus(diff: { days: number }): LocalDate {
+  plus(diff: {days: number} | Duration): LocalDate {
+    const daysToAdd = Duration.isInstance(diff)
+      ? diff.asDays
+      : diff.days
     const targetDate = new Date(
       this.year,
       this.month - 1,
-      this.dayOfMonth + diff.days,
+      this.dayOfMonth + daysToAdd,
       0,
       0,
       0,
